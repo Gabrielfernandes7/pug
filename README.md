@@ -37,6 +37,13 @@ pug-strip-comments | [![NPM version](https://img.shields.io/npm/v/pug-strip-comm
 pug-walk | [![NPM version](https://img.shields.io/npm/v/pug-walk?style=for-the-badge)](https://www.npmjs.com/package/pug-walk)
 <!-- VERSION_TABLE -->
 
+## Contributing and Documentation for Developers
+
+- [CONTRIBUTING.md](./CONTRIBUTING.md): setting up the monorepo, running tests and lint, and opening pull requests
+- [ARCHITECTURE.md](./ARCHITECTURE.md): how a template moves through the compiler pipeline and what each package does
+- [SECURITY.md](./SECURITY.md): threat model, security assumptions and how to report a vulnerability
+- [Filter guide](./packages/pug-filters/README.md#filter-guide): writing and using filters, with examples
+
 ## Rename from "Jade"
 
 This project was formerly known as "Jade". However, it was revealed to us that "Jade" is a registered trademark; as a result, a rename was needed. After some discussion among the maintainers, **"Pug"** was chosen as the new name for this project. As of version 2, "pug" is the official package name.
