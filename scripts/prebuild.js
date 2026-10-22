@@ -68,12 +68,10 @@ packageDirectories.forEach((directory) => {
       .filter((dep) =>
         existsSync(`${__dirname}/../packages/${dep}/tsconfig.json`)
       )
-      .map(
-        (dep) =>
-          `\n    {"path": ${JSON.stringify(
-            `../${dep.substr('@databases/'.length)}`
-          )}},`
-      )
+      .map((dep) => {
+        const depPath = dep.startsWith('@') ? dep.split('/')[1] : dep;
+        return `\n    {"path": ${JSON.stringify(`../${depPath}`)}},`;
+      })
       .join('');
     writeFileSync(
       `${__dirname}/../packages/${directory}/tsconfig.json`,
@@ -84,7 +82,10 @@ packageDirectories.forEach((directory) => {
     "rootDir": "src",
     "outDir": "lib",
     "tsBuildInfoFile": "lib/tsconfig.tsbuildinfo",
+    "noImplicitReturns": false
   },
+  "include": ["src"],
+  "exclude": ["test", "node_modules"],
   "references": ${deps.length ? `[${deps}\n  ],` : '[],'}
 }
 `

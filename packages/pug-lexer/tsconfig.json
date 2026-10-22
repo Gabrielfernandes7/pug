@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "lib",
+    "tsBuildInfoFile": "lib/tsconfig.tsbuildinfo",
+    "noImplicitReturns": false
+  },
+  "include": ["src"],
+  "exclude": ["test", "node_modules"],
+  "references": [
+    {"path": "../pug-error"},
+  ],
+}

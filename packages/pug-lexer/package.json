@@ -5,6 +5,8 @@
   "keywords": [
     "pug"
   ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "character-parser": "^4.0.0",
     "is-expression": "^4.0.0",
@@ -14,9 +16,13 @@
     "acorn": "^7.1.1",
     "acorn-walk": "^7.1.1"
   },
+  "scripts": {
+    "build": "tsc --outDir lib"
+  },
   "files": [
-    "index.js",
-    "index.d.ts"
+    "lib",
+    "README.md",
+    "LICENSE"
   ],
   "repository": {
     "type": "git",
