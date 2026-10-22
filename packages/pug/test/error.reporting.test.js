@@ -209,7 +209,7 @@ describe('error reporting', function() {
           {}
         );
         expect(err.message).toMatch(/mixin.error.pug:2/);
-        expect(err.message).toMatch(/Cannot read property 'length' of null/);
+        expect(err.message).toMatch(/Cannot read propert(y|ies).* of null/);
       });
     });
     describe('in a layout', function() {
@@ -220,7 +220,7 @@ describe('error reporting', function() {
         );
         expect(err.message).toMatch(/layout.with.runtime.error.pug:3/);
         expect(err.message).toMatch(
-          /Cannot read property 'length' of undefined/
+          /Cannot read propert(y|ies).* of undefined/
         );
       });
     });
