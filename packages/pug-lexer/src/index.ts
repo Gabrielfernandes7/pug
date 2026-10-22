@@ -154,7 +154,7 @@ class Lexer {
     }
   }
 
-  tok(type: string, val?: string): Token {
+  tok(type: string, val?: string | number): Token {
     const res: Token = {
       type,
       loc: {
@@ -452,7 +452,7 @@ class Lexer {
 
   addText(type: string, value: string, prefix?: string, escaped?: number): void {
     let tok;
-    if (value + (prefix || '') === '') return;
+    if (value + prefix === '') return;
     prefix = prefix || '';
     escaped = escaped || 0;
     let indexOfEnd = this.interpolated ? value.indexOf(']') : -1;
@@ -1348,7 +1348,7 @@ class Lexer {
         }
         // indent
       } else if (indents && indents != this.indentStack[0]) {
-        tok = this.tok('indent', indents.toString());
+        tok = this.tok('indent', indents);
         this.colno = 1 + indents;
         this.tokens.push(this.tokEnd(tok));
         this.indentStack.unshift(indents);
