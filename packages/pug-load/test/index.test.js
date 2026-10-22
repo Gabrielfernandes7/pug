@@ -1,27 +1,25 @@
-'use strict';
-
-var fs = require('fs');
-var path = require('path');
-var assert = require('assert');
-var walk = require('pug-walk');
-var lex = require('pug-lexer');
-var parse = require('pug-parser');
-var load = require('../');
+const fs = require('fs');
+const path = require('path');
+const assert = require('assert');
+const walk = require('pug-walk');
+const lex = require('pug-lexer');
+const parse = require('pug-parser');
+const load = require('..');
 
 test('pug-load', () => {
-  var filename = __dirname + '/foo.pug';
-  var ast = load.file(filename, {
-    lex: lex,
-    parse: parse,
+  const filename = `${__dirname}/foo.pug`;
+  let ast = load.file(filename, {
+    lex,
+    parse,
   });
 
   ast = walk(
     ast,
-    function (node) {
+    (node) => {
       if (node.filename)
-        node.filename = '<dirname>/' + path.basename(node.filename);
+        node.filename = `<dirname>/${path.basename(node.filename)}`;
       if (node.fullPath)
-        node.fullPath = '<dirname>/' + path.basename(node.fullPath);
+        node.fullPath = `<dirname>/${path.basename(node.fullPath)}`;
     },
     {includeDependencies: true}
   );

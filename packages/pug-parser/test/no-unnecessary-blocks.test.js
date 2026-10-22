@@ -1,7 +1,5 @@
-'use strict';
-
-var lex = require('pug-lexer');
-var parse = require('../');
+const lex = require('pug-lexer');
+const parse = require('..');
 
 const input = `
 div

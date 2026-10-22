@@ -2,26 +2,26 @@
  * Module dependencies.
  */
 
-var uubench = require('uubench'),
-  pug = require('../');
+const uubench = require('uubench');
+const pug = require('..');
 
-var suite = new uubench.Suite({
+const suite = new uubench.Suite({
   min: 200,
-  result: function (name, stats) {
-    var persec = 1000 / stats.elapsed,
-      ops = stats.iterations * persec;
+  result(name, stats) {
+    const persec = 1000 / stats.elapsed;
+    const ops = stats.iterations * persec;
     console.log('%s: %d', name, ops | 0);
   },
 });
 
 function setup(self) {
-  var suffix = self ? ' (self)' : '',
-    options = {self: self};
+  const suffix = self ? ' (self)' : '';
+  const options = {self};
 
-  var str = 'html\n  body\n    h1 Title',
-    fn = pug.compile(str, options);
+  let str = 'html\n  body\n    h1 Title';
+  const fn = pug.compile(str, options);
 
-  suite.bench('tiny' + suffix, function (next) {
+  suite.bench(`tiny${suffix}`, (next) => {
     fn();
     next();
   });
@@ -39,9 +39,9 @@ html\n\
       li: a(href="#") Contact\n\
 ';
 
-  var fn2 = pug.compile(str, options);
+  const fn2 = pug.compile(str, options);
 
-  suite.bench('small' + suffix, function (next) {
+  suite.bench(`small${suffix}`, (next) => {
     fn2();
     next();
   });
@@ -68,9 +68,9 @@ html\n\
 ';
   }
 
-  var fn3 = pug.compile(str, options);
+  const fn3 = pug.compile(str, options);
 
-  suite.bench('small locals' + suffix, function (next) {
+  suite.bench(`small locals${suffix}`, (next) => {
     fn3({
       title: 'Title',
       links: ['Home', 'About Us', 'Store', 'FAQ', 'Contact'],
@@ -92,9 +92,9 @@ html\n\
 ';
 
   str = Array(30).join(str);
-  var fn4 = pug.compile(str, options);
+  const fn4 = pug.compile(str, options);
 
-  suite.bench('medium' + suffix, function (next) {
+  suite.bench(`medium${suffix}`, (next) => {
     fn4();
     next();
   });
@@ -113,9 +113,9 @@ html\n\
 ';
 
   str = Array(100).join(str);
-  var fn5 = pug.compile(str, options);
+  const fn5 = pug.compile(str, options);
 
-  suite.bench('large' + suffix, function (next) {
+  suite.bench(`large${suffix}`, (next) => {
     fn5();
     next();
   });

@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = walkAST;
 function walkAST(ast, before, after, options) {
   if (after && typeof after === 'object' && typeof options === 'undefined') {
@@ -7,9 +5,9 @@ function walkAST(ast, before, after, options) {
     after = null;
   }
   options = options || {includeDependencies: false};
-  var parents = (options.parents = options.parents || []);
+  const parents = (options.parents = options.parents || []);
 
-  var replace = function replace(replacement) {
+  const replace = function replace(replacement) {
     if (Array.isArray(replacement) && !replace.arrayAllowed) {
       throw new Error(
         'replace() can only be called with an array if the last parent is a Block or NamedBlock'
@@ -23,10 +21,11 @@ function walkAST(ast, before, after, options) {
       (parents[0].type === 'RawInclude' && ast.type === 'IncludeFilter'));
 
   if (before) {
-    var result = before(ast, replace);
+    const result = before(ast, replace);
     if (result === false) {
       return ast;
-    } else if (Array.isArray(ast)) {
+    }
+    if (Array.isArray(ast)) {
       // return right here to skip after() call on array
       return walkAndMergeNodes(ast);
     }
@@ -98,7 +97,7 @@ function walkAST(ast, before, after, options) {
       }
       break;
     default:
-      throw new Error('Unexpected node type ' + ast.type);
+      throw new Error(`Unexpected node type ${ast.type}`);
       break;
   }
 
@@ -108,13 +107,12 @@ function walkAST(ast, before, after, options) {
   return ast;
 
   function walkAndMergeNodes(nodes) {
-    return nodes.reduce(function (nodes, node) {
-      var result = walkAST(node, before, after, options);
+    return nodes.reduce((nodes, node) => {
+      const result = walkAST(node, before, after, options);
       if (Array.isArray(result)) {
         return nodes.concat(result);
-      } else {
-        return nodes.concat([result]);
       }
+      return nodes.concat([result]);
     }, []);
   }
 }

@@ -1,9 +1,9 @@
-const pug = require('../');
+const pug = require('..');
 
 test('#3295 - lexer plugins should be used in tag interpolation', () => {
   const lex = {
     advance(lexer) {
-      if ('~' === lexer.input.charAt(0)) {
+      if (lexer.input.charAt(0) === '~') {
         lexer.tokens.push(lexer.tok('text', 'twiddle-dee-dee'));
         lexer.consume(1);
         lexer.incrementColumn(1);

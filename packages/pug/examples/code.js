@@ -2,14 +2,16 @@
  * Module dependencies.
  */
 
-var pug = require('../'),
-  path = __dirname + '/code.pug',
-  str = require('fs').readFileSync(path, 'utf8'),
-  fn = pug.compile(str, {filename: path, pretty: true});
+const pug = require('..');
 
-var users = {
+const path = `${__dirname}/code.pug`;
+const str = require('fs').readFileSync(path, 'utf8');
+
+const fn = pug.compile(str, {filename: path, pretty: true});
+
+const users = {
   tj: {age: 23, email: 'tj@vision-media.ca', isA: 'human'},
   tobi: {age: 1, email: 'tobi@is-amazing.com', isA: 'ferret'},
 };
 
-console.log(fn({users: users}));
+console.log(fn({users}));

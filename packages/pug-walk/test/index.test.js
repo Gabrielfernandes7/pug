@@ -1,14 +1,12 @@
-'use strict';
+const assert = require('assert');
+const lex = require('pug-lexer');
+const parse = require('pug-parser');
+const walk = require('..');
 
-var assert = require('assert');
-var lex = require('pug-lexer');
-var parse = require('pug-parser');
-var walk = require('../');
-
-test('simple', function () {
-  var ast = walk(
+test('simple', () => {
+  const ast = walk(
     parse(lex('.my-class foo')),
-    function before(node, replace) {
+    (node, replace) => {
       // called before walking the children of `node`
       // to replace the node, call `replace(newNode)`
       // return `false` to skip descending
@@ -21,7 +19,7 @@ test('simple', function () {
         });
       }
     },
-    function after(node, replace) {
+    (node, replace) => {
       // called before walking the children of `node`
       // to replace the node, call `replace(newNode)`
     }
@@ -29,10 +27,10 @@ test('simple', function () {
   expect(ast).toEqual(parse(lex('.my-class bar')));
 });
 
-describe('replace([])', function () {
-  test('block flattening', function () {
-    var called = [];
-    var ast = walk(
+describe('replace([])', () => {
+  test('block flattening', () => {
+    const called = [];
+    const ast = walk(
       {
         type: 'Block',
         nodes: [
@@ -64,9 +62,9 @@ describe('replace([])', function () {
           },
         ],
       },
-      function (node, replace) {
+      (node, replace) => {
         if (node.type === 'Text') {
-          called.push('before ' + node.val);
+          called.push(`before ${node.val}`);
           if (node.val === 'a') {
             assert(replace.arrayAllowed, 'replace.arrayAllowed set wrongly');
             replace([
@@ -82,11 +80,11 @@ describe('replace([])', function () {
           }
         }
       },
-      function (node, replace) {
+      (node, replace) => {
         if (node.type === 'Block' && replace.arrayAllowed) {
           replace(node.nodes);
         } else if (node.type === 'Text') {
-          called.push('after ' + node.val);
+          called.push(`after ${node.val}`);
         }
       }
     );
@@ -122,18 +120,18 @@ describe('replace([])', function () {
         'before d',
         'after d',
       ],
-      'before() and after() called incorrectly: ' + JSON.stringify(called)
+      `before() and after() called incorrectly: ${JSON.stringify(called)}`
     );
   });
 
-  test('adding include filters', function () {
-    var ast = walk(
+  test('adding include filters', () => {
+    const ast = walk(
       parse(lex('include:filter1:filter2 file')),
-      function (node, replace) {
+      (node, replace) => {
         if (node.type === 'IncludeFilter') {
           assert(replace.arrayAllowed);
           if (node.name === 'filter1') {
-            var firstFilter = 'filter3';
+            const firstFilter = 'filter3';
 
             replace([
               {
@@ -161,15 +159,15 @@ describe('replace([])', function () {
     expect(ast).toEqual(parse(lex('include:filter3:filter4 file')));
   });
 
-  test('fails when parent is not Block', function () {
-    walk(parse(lex('p content')), function (node, replace) {
+  test('fails when parent is not Block', () => {
+    walk(parse(lex('p content')), (node, replace) => {
       if (
         node.type === 'Block' &&
         node.nodes[0] &&
         node.nodes[0].type === 'Text'
       ) {
         assert(!replace.arrayAllowed, 'replace.arrayAllowed set wrongly');
-        assert.throws(function () {
+        assert.throws(() => {
           replace([]);
         });
       }

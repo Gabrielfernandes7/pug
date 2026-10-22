@@ -28,25 +28,19 @@ THE SOFTWARE.`;
 
 const packageNames = [];
 const typeScriptPackages = [];
-const packageDirectories = readdirSync(__dirname + '/../packages')
+const packageDirectories = readdirSync(`${__dirname}/../packages`)
   .filter((directory) =>
-    statSync(__dirname + '/../packages/' + directory).isDirectory()
+    statSync(`${__dirname}/../packages/${directory}`).isDirectory()
   )
   .sort();
 packageDirectories.forEach((directory) => {
-  if (!existsSync(__dirname + '/../packages/' + directory + '/LICENSE')) {
-    writeFileSync(
-      __dirname + '/../packages/' + directory + '/LICENSE',
-      LICENSE
-    );
+  if (!existsSync(`${__dirname}/../packages/${directory}/LICENSE`)) {
+    writeFileSync(`${__dirname}/../packages/${directory}/LICENSE`, LICENSE);
   }
   let pkg = {};
   try {
     pkg = JSON.parse(
-      readFileSync(
-        __dirname + '/../packages/' + directory + '/package.json',
-        'utf8'
-      )
+      readFileSync(`${__dirname}/../packages/${directory}/package.json`, 'utf8')
     );
   } catch (ex) {
     if (ex.code !== 'ENOENT') {
@@ -61,28 +55,28 @@ packageDirectories.forEach((directory) => {
   const after = JSON.stringify(pkg);
   if (before !== after) {
     writeFileSync(
-      __dirname + '/../packages/' + directory + '/package.json',
-      JSON.stringify(pkg, null, '  ') + '\n'
+      `${__dirname}/../packages/${directory}/package.json`,
+      `${JSON.stringify(pkg, null, '  ')}\n`
     );
   }
-  if (existsSync(__dirname + '/../packages/' + directory + '/tsconfig.json')) {
+  if (existsSync(`${__dirname}/../packages/${directory}/tsconfig.json`)) {
     typeScriptPackages.push(directory);
     const deps = [
       ...Object.keys(pkg.dependencies || {}),
       ...Object.keys(pkg.devDependencies || {}),
     ]
       .filter((dep) =>
-        existsSync(__dirname + '/../packages/' + dep + '/tsconfig.json')
+        existsSync(`${__dirname}/../packages/${dep}/tsconfig.json`)
       )
       .map(
         (dep) =>
           `\n    {"path": ${JSON.stringify(
-            `../${dep.substr(`@databases/`.length)}`
+            `../${dep.substr('@databases/'.length)}`
           )}},`
       )
-      .join(``);
+      .join('');
     writeFileSync(
-      __dirname + '/../packages/' + directory + '/tsconfig.json',
+      `${__dirname}/../packages/${directory}/tsconfig.json`,
       `{
   "extends": "../../tsconfig.json",
   "compilerOptions": {
@@ -91,7 +85,7 @@ packageDirectories.forEach((directory) => {
     "outDir": "lib",
     "tsBuildInfoFile": "lib/tsconfig.tsbuildinfo",
   },
-  "references": ${deps.length ? `[${deps}\n  ],` : `[],`}
+  "references": ${deps.length ? `[${deps}\n  ],` : '[],'}
 }
 `
     );
@@ -99,17 +93,17 @@ packageDirectories.forEach((directory) => {
 });
 
 writeFileSync(
-  `scripts/tsconfig.json`,
+  'scripts/tsconfig.json',
   `{
   "extends": "../tsconfig.json",
   "references": [${typeScriptPackages
     .map((n) => `\n    {"path": ${JSON.stringify(`../packages/${n}`)}},`)
-    .join(``)}
+    .join('')}
   ],
 }`
 );
 const [README_HEADER, _table, README_FOOTER] = readFileSync(
-  __dirname + '/../README.md',
+  `${__dirname}/../README.md`,
   'utf8'
 ).split('<!-- VERSION_TABLE -->');
 
@@ -125,7 +119,7 @@ ${packageNames
   .join('\n')}
 `;
 writeFileSync(
-  __dirname + '/../README.md',
+  `${__dirname}/../README.md`,
   [README_HEADER, versionsTable, README_FOOTER || ''].join(
     '<!-- VERSION_TABLE -->'
   )

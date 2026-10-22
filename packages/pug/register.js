@@ -1,17 +1,14 @@
-var pug = require('./');
-var resolvedPug = JSON.stringify(require.resolve('./'));
+const pug = require('.');
+
+const resolvedPug = JSON.stringify(require.resolve('./'));
 
 function compileTemplate(module, filename) {
-  var template = pug.compileFileClient(filename, {
+  const template = pug.compileFileClient(filename, {
     inlineRuntimeFunctions: false,
   });
-  var body =
-    'var pug = require(' +
-    resolvedPug +
-    ').runtime;\n\n' +
-    'module.exports = ' +
-    template +
-    ';';
+  const body =
+    `var pug = require(${resolvedPug}).runtime;\n\n` +
+    `module.exports = ${template};`;
   module._compile(body, filename);
 }
 

@@ -2,12 +2,14 @@
  * Module dependencies.
  */
 
-var pug = require('../'),
-  path = __dirname + '/rss.pug',
-  str = require('fs').readFileSync(path, 'utf8'),
-  fn = pug.compile(str, {filename: path, pretty: true});
+const pug = require('..');
 
-var items = [];
+const path = `${__dirname}/rss.pug`;
+const str = require('fs').readFileSync(path, 'utf8');
+
+const fn = pug.compile(str, {filename: path, pretty: true});
+
+const items = [];
 
 items.push({
   title: 'Example',
@@ -25,4 +27,4 @@ items.push({
   link: 'http://expressjs.com',
 });
 
-console.log(fn({items: items}));
+console.log(fn({items}));

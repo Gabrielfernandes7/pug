@@ -1,25 +1,23 @@
-'use strict';
+const fs = require('fs');
+const assert = require('assert');
+const {handleFilters} = require('..');
+const customFilters = require('./custom-filters.js');
 
-var fs = require('fs');
-var assert = require('assert');
-var handleFilters = require('../').handleFilters;
-var customFilters = require('./custom-filters.js');
+process.chdir(`${__dirname}/../`);
 
-process.chdir(__dirname + '/../');
+let testCases;
 
-var testCases;
-
-testCases = fs.readdirSync(__dirname + '/cases').filter(function (name) {
-  return /\.input\.json$/.test(name);
-});
+testCases = fs
+  .readdirSync(`${__dirname}/cases`)
+  .filter((name) => /\.input\.json$/.test(name));
 //
-testCases.forEach(function (filename) {
+testCases.forEach((filename) => {
   function read(path) {
-    return fs.readFileSync(__dirname + '/cases/' + path, 'utf8');
+    return fs.readFileSync(`${__dirname}/cases/${path}`, 'utf8');
   }
 
-  test('cases/' + filename, function () {
-    var actualAst = JSON.stringify(
+  test(`cases/${filename}`, () => {
+    const actualAst = JSON.stringify(
       handleFilters(JSON.parse(read(filename)), customFilters),
       null,
       '  '
@@ -28,20 +26,20 @@ testCases.forEach(function (filename) {
   });
 });
 
-testCases = fs.readdirSync(__dirname + '/errors').filter(function (name) {
-  return /\.input\.json$/.test(name);
-});
+testCases = fs
+  .readdirSync(`${__dirname}/errors`)
+  .filter((name) => /\.input\.json$/.test(name));
 
-testCases.forEach(function (filename) {
+testCases.forEach((filename) => {
   function read(path) {
-    return fs.readFileSync(__dirname + '/errors/' + path, 'utf8');
+    return fs.readFileSync(`${__dirname}/errors/${path}`, 'utf8');
   }
 
-  test('errors/' + filename, function () {
-    var actual;
+  test(`errors/${filename}`, () => {
+    let actual;
     try {
       handleFilters(JSON.parse(read(filename)), customFilters);
-      throw new Error('Expected ' + filename + ' to throw an exception.');
+      throw new Error(`Expected ${filename} to throw an exception.`);
     } catch (ex) {
       if (!ex || !ex.code || ex.code.indexOf('PUG:') !== 0) throw ex;
       actual = {

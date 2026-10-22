@@ -1,21 +1,21 @@
 const assert = require('assert');
 const fs = require('fs');
 const runUtils = require('./run-utils');
-const pug = require('../');
+const pug = require('..');
 
-const anti = runUtils.findCases(__dirname + '/anti-cases');
+const anti = runUtils.findCases(`${__dirname}/anti-cases`);
 
-describe('certain syntax is not allowed and will throw a compile time error', function () {
-  anti.forEach(function (test) {
-    var name = test.replace(/[-.]/g, ' ');
-    it(name, function () {
-      var path = __dirname.replace(/\\/g, '/') + '/anti-cases/' + test + '.pug';
-      var str = fs.readFileSync(path, 'utf8');
+describe('certain syntax is not allowed and will throw a compile time error', () => {
+  anti.forEach((test) => {
+    const name = test.replace(/[-.]/g, ' ');
+    it(name, () => {
+      const path = `${__dirname.replace(/\\/g, '/')}/anti-cases/${test}.pug`;
+      const str = fs.readFileSync(path, 'utf8');
       try {
-        var fn = pug.compile(str, {
+        const fn = pug.compile(str, {
           filename: path,
           pretty: true,
-          basedir: __dirname + '/anti-cases',
+          basedir: `${__dirname}/anti-cases`,
           filters: runUtils.filters,
         });
       } catch (ex) {
@@ -37,7 +37,7 @@ describe('certain syntax is not allowed and will throw a compile time error', fu
         );
         return;
       }
-      throw new Error(test + ' should have thrown an error');
+      throw new Error(`${test} should have thrown an error`);
     });
   });
 });

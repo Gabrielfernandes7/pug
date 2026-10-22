@@ -1,38 +1,30 @@
-'use strict';
+const assert = require('assert');
+const utils = require('util');
+const attrs = require('..');
 
-var assert = require('assert');
-var utils = require('util');
-var attrs = require('../');
-
-var options;
+let options;
 function test(input, expected, locals) {
-  var opts = options;
+  const opts = options;
   locals = locals || {};
   locals.pug = locals.pug || require('pug-runtime');
-  it(
-    utils.inspect(input).replace(/\n/g, '') + ' => ' + utils.inspect(expected),
-    function () {
-      var src = attrs(input, opts);
-      var localKeys = Object.keys(locals).sort();
-      var output = Function(
-        localKeys.join(', '),
-        'return (' + src + ');'
-      ).apply(
-        null,
-        localKeys.map(function (key) {
-          return locals[key];
-        })
-      );
-      if (opts.format === 'html') {
-        expect(output).toBe(expected);
-      } else {
-        expect(output).toEqual(expected);
-      }
+  it(`${utils.inspect(input).replace(/\n/g, '')} => ${utils.inspect(
+    expected
+  )}`, () => {
+    const src = attrs(input, opts);
+    const localKeys = Object.keys(locals).sort();
+    const output = Function(localKeys.join(', '), `return (${src});`).apply(
+      null,
+      localKeys.map((key) => locals[key])
+    );
+    if (opts.format === 'html') {
+      expect(output).toBe(expected);
+    } else {
+      expect(output).toEqual(expected);
     }
-  );
+  });
 }
 function withOptions(opts, fn) {
-  describe('options: ' + utils.inspect(opts), function () {
+  describe(`options: ${utils.inspect(opts)}`, () => {
     options = opts;
     fn();
   });
@@ -42,11 +34,11 @@ withOptions(
   {
     terse: true,
     format: 'html',
-    runtime: function (name) {
-      return 'pug.' + name;
+    runtime(name) {
+      return `pug.${name}`;
     },
   },
-  function () {
+  () => {
     test([], '');
     test([{name: 'foo', val: 'false', mustEscape: true}], '');
     test([{name: 'foo', val: 'true', mustEscape: true}], ' foo');
@@ -144,11 +136,11 @@ withOptions(
   {
     terse: false,
     format: 'html',
-    runtime: function (name) {
-      return 'pug.' + name;
+    runtime(name) {
+      return `pug.${name}`;
     },
   },
-  function () {
+  () => {
     test([{name: 'foo', val: 'false', mustEscape: true}], '');
     test([{name: 'foo', val: 'true', mustEscape: true}], ' foo="foo"');
     test([{name: 'foo', val: false, mustEscape: true}], '');
@@ -164,11 +156,11 @@ withOptions(
   {
     terse: true,
     format: 'object',
-    runtime: function (name) {
-      return 'pug.' + name;
+    runtime(name) {
+      return `pug.${name}`;
     },
   },
-  function () {
+  () => {
     test([], {});
     test([{name: 'foo', val: 'false', mustEscape: true}], {foo: false});
     test([{name: 'foo', val: 'true', mustEscape: true}], {foo: true});
@@ -278,11 +270,11 @@ withOptions(
   {
     terse: false,
     format: 'object',
-    runtime: function (name) {
-      return 'pug.' + name;
+    runtime(name) {
+      return `pug.${name}`;
     },
   },
-  function () {
+  () => {
     test([{name: 'foo', val: 'false', mustEscape: true}], {foo: false});
     test([{name: 'foo', val: 'true', mustEscape: true}], {foo: true});
     test([{name: 'foo', val: false, mustEscape: true}], {foo: false});
