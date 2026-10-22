@@ -2,8 +2,8 @@
 
 var error = require('../');
 
-describe('with a source', function() {
-  test('and a filename', function() {
+describe('with a source', function () {
+  test('and a filename', function () {
     var err = error('MY_CODE', 'My message', {
       line: 3,
       filename: 'myfile',
@@ -18,7 +18,7 @@ describe('with a source', function() {
     expect(err.filename).toBe('myfile');
     expect(err.src).toBe('foo\nbar\nbaz\nbash\nbing');
   });
-  test('and no filename', function() {
+  test('and no filename', function () {
     var err = error('MY_CODE', 'My message', {
       line: 3,
       src: 'foo\nbar\nbaz\nbash\nbing',
@@ -34,8 +34,8 @@ describe('with a source', function() {
   });
 });
 
-describe('without source', function() {
-  test('and with a filename', function() {
+describe('without source', function () {
+  test('and with a filename', function () {
     var err = error('MY_CODE', 'My message', {line: 3, filename: 'myfile'});
     expect(err.message).toBe('myfile:3\n\nMy message');
     expect(err.code).toBe('PUG:MY_CODE');
@@ -44,7 +44,7 @@ describe('without source', function() {
     expect(err.filename).toBe('myfile');
     expect(err.src).toBe(undefined);
   });
-  test('and with no filename', function() {
+  test('and with no filename', function () {
     var err = error('MY_CODE', 'My message', {line: 3});
     expect(err.message).toBe('Pug:3\n\nMy message');
     expect(err.code).toBe('PUG:MY_CODE');
@@ -55,8 +55,8 @@ describe('without source', function() {
   });
 });
 
-describe('with column', function() {
-  test('and with a filename', function() {
+describe('with column', function () {
+  test('and with a filename', function () {
     var err = error('MY_CODE', 'My message', {
       line: 3,
       column: 2,
@@ -72,7 +72,7 @@ describe('with column', function() {
     expect(err.filename).toBe('myfile');
     expect(err.src).toBe('foo\nbar\nbaz\nbash\nbing');
   });
-  test('and with no filename', function() {
+  test('and with no filename', function () {
     var err = error('MY_CODE', 'My message', {line: 3, column: 1});
     expect(err.message).toBe('Pug:3:1\n\nMy message');
     expect(err.code).toBe('PUG:MY_CODE');
@@ -83,8 +83,8 @@ describe('with column', function() {
   });
 });
 
-describe('invalid information', function() {
-  test('negative column', function() {
+describe('invalid information', function () {
+  test('negative column', function () {
     var err = error('MY_CODE', 'My message', {
       line: 3,
       column: -1,
@@ -99,7 +99,7 @@ describe('invalid information', function() {
     expect(err.filename).toBe(undefined);
     expect(err.src).toBe('foo\nbar\nbaz\nbash\nbing');
   });
-  test('out of range line', function() {
+  test('out of range line', function () {
     check(0);
     check(6);
 

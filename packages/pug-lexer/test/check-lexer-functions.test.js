@@ -104,7 +104,7 @@ test('lexer functions', () => {
   var str = fs.readFileSync(__dirname + '/../index.js', 'utf8');
   var ast = acorn.parse(str, {locations: true});
   walk.simple(ast, {
-    CallExpression: function(node) {
+    CallExpression: function (node) {
       checkDirectCalls(node);
       checkMissingLexerFunction(node);
     },

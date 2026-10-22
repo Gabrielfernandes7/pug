@@ -11,7 +11,7 @@ function handleFilters(ast, filters, options, filterAliases) {
   options = options || {};
   walk(
     ast,
-    function(node) {
+    function (node) {
       var dir = node.filename ? dirname(node.filename) : null;
       if (node.type === 'Filter') {
         handleNestedFilters(node, filters, options, filterAliases);
@@ -34,7 +34,7 @@ function handleFilters(ast, filters, options, filterAliases) {
         node.filters
           .slice()
           .reverse()
-          .forEach(function(filter) {
+          .forEach(function (filter) {
             var attrs = getAttributes(filter, options);
             attrs.filename = filename;
             node.val = filterWithFallback(filter, node.val, attrs);
@@ -110,7 +110,7 @@ function handleNestedFilters(node, filters, options, filterAliases) {
 
 function getBodyAsText(node) {
   return node.block.nodes
-    .map(function(node) {
+    .map(function (node) {
       return node.val;
     })
     .join('');
@@ -118,7 +118,7 @@ function getBodyAsText(node) {
 
 function getAttributes(node, options) {
   var attrs = {};
-  node.attrs.forEach(function(attr) {
+  node.attrs.forEach(function (attr) {
     try {
       attrs[attr.name] =
         attr.val === true ? true : constantinople.toConstant(attr.val);
@@ -135,7 +135,7 @@ function getAttributes(node, options) {
     }
   });
   var opts = options[node.name] || {};
-  Object.keys(opts).forEach(function(opt) {
+  Object.keys(opts).forEach(function (opt) {
     if (!attrs.hasOwnProperty(opt)) {
       attrs[opt] = opts[opt];
     }

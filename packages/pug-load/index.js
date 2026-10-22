@@ -10,7 +10,7 @@ function load(ast, options) {
   options = getOptions(options);
   // clone the ast
   ast = JSON.parse(JSON.stringify(ast));
-  return walk(ast, function(node) {
+  return walk(ast, function (node) {
     if (node.str === undefined) {
       if (
         node.type === 'Include' ||

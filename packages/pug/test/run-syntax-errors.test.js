@@ -5,10 +5,10 @@ const pug = require('../');
 
 const anti = runUtils.findCases(__dirname + '/anti-cases');
 
-describe('certain syntax is not allowed and will throw a compile time error', function() {
-  anti.forEach(function(test) {
+describe('certain syntax is not allowed and will throw a compile time error', function () {
+  anti.forEach(function (test) {
     var name = test.replace(/[-.]/g, ' ');
-    it(name, function() {
+    it(name, function () {
       var path = __dirname.replace(/\\/g, '/') + '/anti-cases/' + test + '.pug';
       var str = fs.readFileSync(path, 'utf8');
       try {

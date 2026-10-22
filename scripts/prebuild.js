@@ -29,11 +29,11 @@ THE SOFTWARE.`;
 const packageNames = [];
 const typeScriptPackages = [];
 const packageDirectories = readdirSync(__dirname + '/../packages')
-  .filter(directory =>
+  .filter((directory) =>
     statSync(__dirname + '/../packages/' + directory).isDirectory()
   )
   .sort();
-packageDirectories.forEach(directory => {
+packageDirectories.forEach((directory) => {
   if (!existsSync(__dirname + '/../packages/' + directory + '/LICENSE')) {
     writeFileSync(
       __dirname + '/../packages/' + directory + '/LICENSE',
@@ -71,11 +71,11 @@ packageDirectories.forEach(directory => {
       ...Object.keys(pkg.dependencies || {}),
       ...Object.keys(pkg.devDependencies || {}),
     ]
-      .filter(dep =>
+      .filter((dep) =>
         existsSync(__dirname + '/../packages/' + dep + '/tsconfig.json')
       )
       .map(
-        dep =>
+        (dep) =>
           `\n    {"path": ${JSON.stringify(
             `../${dep.substr(`@databases/`.length)}`
           )}},`
@@ -103,7 +103,7 @@ writeFileSync(
   `{
   "extends": "../tsconfig.json",
   "references": [${typeScriptPackages
-    .map(n => `\n    {"path": ${JSON.stringify(`../packages/${n}`)}},`)
+    .map((n) => `\n    {"path": ${JSON.stringify(`../packages/${n}`)}},`)
     .join(``)}
   ],
 }`
@@ -119,7 +119,7 @@ Package Name | Version
 ${packageNames
   .sort()
   .map(
-    name =>
+    (name) =>
       `${name} | [![NPM version](https://img.shields.io/npm/v/${name}?style=for-the-badge)](https://www.npmjs.com/package/${name})`
   )
   .join('\n')}

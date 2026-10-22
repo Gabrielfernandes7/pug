@@ -5,7 +5,7 @@ var assert = require('assert');
 var lex = require('../');
 
 var dir = __dirname + '/cases/';
-fs.readdirSync(dir).forEach(function(testCase) {
+fs.readdirSync(dir).forEach(function (testCase) {
   if (/\.pug$/.test(testCase)) {
     test(testCase, () => {
       var result = lex(fs.readFileSync(dir + testCase, 'utf8'), {
@@ -17,7 +17,7 @@ fs.readdirSync(dir).forEach(function(testCase) {
 });
 
 var edir = __dirname + '/errors/';
-fs.readdirSync(edir).forEach(function(testCase) {
+fs.readdirSync(edir).forEach(function (testCase) {
   if (/\.pug$/.test(testCase)) {
     test(testCase, () => {
       var actual;

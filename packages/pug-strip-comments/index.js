@@ -25,7 +25,7 @@ function stripComments(input, options) {
   // `end-pipeless-text` should be ignored
   var inPipelessText = false;
 
-  return input.filter(function(tok) {
+  return input.filter(function (tok) {
     switch (tok.type) {
       case 'comment':
         if (inComment) {

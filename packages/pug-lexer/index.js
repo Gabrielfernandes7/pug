@@ -58,7 +58,7 @@ function Lexer(str, options) {
 Lexer.prototype = {
   constructor: Lexer,
 
-  error: function(code, message) {
+  error: function (code, message) {
     var err = error(code, message, {
       line: this.lineno,
       column: this.colno,
@@ -68,17 +68,17 @@ Lexer.prototype = {
     throw err;
   },
 
-  assert: function(value, message) {
+  assert: function (value, message) {
     if (!value) this.error('ASSERT_FAILED', message);
   },
 
-  isExpression: function(exp) {
+  isExpression: function (exp) {
     return isExpression(exp, {
       throw: true,
     });
   },
 
-  assertExpression: function(exp, noThrow) {
+  assertExpression: function (exp, noThrow) {
     //this verifies that a JavaScript expression is valid
     try {
       this.callLexerFunction('isExpression', exp);
@@ -97,7 +97,7 @@ Lexer.prototype = {
     }
   },
 
-  assertNestingCorrect: function(exp) {
+  assertNestingCorrect: function (exp) {
     //this verifies that code is properly nested, but allows
     //invalid JavaScript such as the contents of `attributes`
     var res = characterParser.default(exp);
@@ -118,7 +118,7 @@ Lexer.prototype = {
    * @api private
    */
 
-  tok: function(type, val) {
+  tok: function (type, val) {
     var res = {
       type: type,
       loc: {
@@ -143,7 +143,7 @@ Lexer.prototype = {
    * @api private
    */
 
-  tokEnd: function(tok) {
+  tokEnd: function (tok) {
     tok.loc.end = {
       line: this.lineno,
       column: this.colno,
@@ -158,7 +158,7 @@ Lexer.prototype = {
    * @api private
    */
 
-  incrementLine: function(increment) {
+  incrementLine: function (increment) {
     this.lineno += increment;
     if (increment) this.colno = 1;
   },
@@ -170,7 +170,7 @@ Lexer.prototype = {
    * @api private
    */
 
-  incrementColumn: function(increment) {
+  incrementColumn: function (increment) {
     this.colno += increment;
   },
 
@@ -181,7 +181,7 @@ Lexer.prototype = {
    * @api private
    */
 
-  consume: function(len) {
+  consume: function (len) {
     this.input = this.input.substr(len);
   },
 
@@ -194,7 +194,7 @@ Lexer.prototype = {
    * @api private
    */
 
-  scan: function(regexp, type) {
+  scan: function (regexp, type) {
     var captures;
     if ((captures = regexp.exec(this.input))) {
       var len = captures[0].length;
@@ -206,7 +206,7 @@ Lexer.prototype = {
       return tok;
     }
   },
-  scanEndOfLine: function(regexp, type) {
+  scanEndOfLine: function (regexp, type) {
     var captures;
     if ((captures = regexp.exec(this.input))) {
       var whitespaceLength = 0;
@@ -242,7 +242,7 @@ Lexer.prototype = {
    * @api private
    */
 
-  bracketExpression: function(skip) {
+  bracketExpression: function (skip) {
     skip = skip || 0;
     var start = this.input[skip];
     assert(
@@ -285,7 +285,7 @@ Lexer.prototype = {
     return range;
   },
 
-  scanIndentation: function() {
+  scanIndentation: function () {
     var captures, re;
 
     // established regexp
@@ -314,7 +314,7 @@ Lexer.prototype = {
    * end-of-source.
    */
 
-  eos: function() {
+  eos: function () {
     if (this.input.length) return;
     if (this.interpolated) {
       this.error(
@@ -334,7 +334,7 @@ Lexer.prototype = {
    * Blank line.
    */
 
-  blank: function() {
+  blank: function () {
     var captures;
     if ((captures = /^\n[ \t]*\n/.exec(this.input))) {
       this.consume(captures[0].length - 1);
@@ -347,7 +347,7 @@ Lexer.prototype = {
    * Comment.
    */
 
-  comment: function() {
+  comment: function () {
     var captures;
     if ((captures = /^\/\/(-)?([^\n]*)/.exec(this.input))) {
       this.consume(captures[0].length);
@@ -366,7 +366,7 @@ Lexer.prototype = {
    * Interpolated tag.
    */
 
-  interpolation: function() {
+  interpolation: function () {
     if (/^#\{/.test(this.input)) {
       var match = this.bracketExpression(1);
       this.consume(match.end + 1);
@@ -388,7 +388,7 @@ Lexer.prototype = {
    * Tag.
    */
 
-  tag: function() {
+  tag: function () {
     var captures;
 
     if ((captures = /^(\w(?:[-:\w]*\w)?)/.exec(this.input))) {
@@ -408,7 +408,7 @@ Lexer.prototype = {
    * Filter.
    */
 
-  filter: function(opts) {
+  filter: function (opts) {
     var tok = this.scan(/^:([\w\-]+)/, 'filter');
     var inInclude = opts && opts.inInclude;
     if (tok) {
@@ -428,7 +428,7 @@ Lexer.prototype = {
    * Doctype.
    */
 
-  doctype: function() {
+  doctype: function () {
     var node = this.scanEndOfLine(/^doctype *([^\n]*)/, 'doctype');
     if (node) {
       this.tokens.push(this.tokEnd(node));
@@ -440,7 +440,7 @@ Lexer.prototype = {
    * Id.
    */
 
-  id: function() {
+  id: function () {
     var tok = this.scan(/^#([\w-]+)/, 'id');
     if (tok) {
       this.tokens.push(tok);
@@ -462,7 +462,7 @@ Lexer.prototype = {
    * Class.
    */
 
-  className: function() {
+  className: function () {
     var tok = this.scan(/^\.([_a-z0-9\-]*[_a-z][_a-z0-9\-]*)/i, 'class');
     if (tok) {
       this.tokens.push(tok);
@@ -489,14 +489,14 @@ Lexer.prototype = {
   /**
    * Text.
    */
-  endInterpolation: function() {
+  endInterpolation: function () {
     if (this.interpolated && this.input[0] === ']') {
       this.input = this.input.substr(1);
       this.ended = true;
       return true;
     }
   },
-  addText: function(type, value, prefix, escaped) {
+  addText: function (type, value, prefix, escaped) {
     var tok;
     if (value + prefix === '') return;
     prefix = prefix || '';
@@ -644,7 +644,7 @@ Lexer.prototype = {
     this.tokens.push(this.tokEnd(tok));
   },
 
-  text: function() {
+  text: function () {
     var tok =
       this.scan(/^(?:\| ?| )([^\n]+)/, 'text') ||
       this.scan(/^( )/, 'text') ||
@@ -655,7 +655,7 @@ Lexer.prototype = {
     }
   },
 
-  textHtml: function() {
+  textHtml: function () {
     var tok = this.scan(/^(<[^\n]*)/, 'text-html');
     if (tok) {
       this.addText('text-html', tok.val);
@@ -667,7 +667,7 @@ Lexer.prototype = {
    * Dot.
    */
 
-  dot: function() {
+  dot: function () {
     var tok;
     if ((tok = this.scanEndOfLine(/^\./, 'dot'))) {
       this.tokens.push(this.tokEnd(tok));
@@ -680,7 +680,7 @@ Lexer.prototype = {
    * Extends.
    */
 
-  extends: function() {
+  extends: function () {
     var tok = this.scan(/^extends?(?= |$|\n)/, 'extends');
     if (tok) {
       this.tokens.push(this.tokEnd(tok));
@@ -698,18 +698,13 @@ Lexer.prototype = {
    * Block prepend.
    */
 
-  prepend: function() {
+  prepend: function () {
     var captures;
     if ((captures = /^(?:block +)?prepend +([^\n]+)/.exec(this.input))) {
       var name = captures[1].trim();
       var comment = '';
       if (name.indexOf('//') !== -1) {
-        comment =
-          '//' +
-          name
-            .split('//')
-            .slice(1)
-            .join('//');
+        comment = '//' + name.split('//').slice(1).join('//');
         name = name.split('//')[0].trim();
       }
       if (!name) return;
@@ -729,18 +724,13 @@ Lexer.prototype = {
    * Block append.
    */
 
-  append: function() {
+  append: function () {
     var captures;
     if ((captures = /^(?:block +)?append +([^\n]+)/.exec(this.input))) {
       var name = captures[1].trim();
       var comment = '';
       if (name.indexOf('//') !== -1) {
-        comment =
-          '//' +
-          name
-            .split('//')
-            .slice(1)
-            .join('//');
+        comment = '//' + name.split('//').slice(1).join('//');
         name = name.split('//')[0].trim();
       }
       if (!name) return;
@@ -760,18 +750,13 @@ Lexer.prototype = {
    * Block.
    */
 
-  block: function() {
+  block: function () {
     var captures;
     if ((captures = /^block +([^\n]+)/.exec(this.input))) {
       var name = captures[1].trim();
       var comment = '';
       if (name.indexOf('//') !== -1) {
-        comment =
-          '//' +
-          name
-            .split('//')
-            .slice(1)
-            .join('//');
+        comment = '//' + name.split('//').slice(1).join('//');
         name = name.split('//')[0].trim();
       }
       if (!name) return;
@@ -791,7 +776,7 @@ Lexer.prototype = {
    * Mixin Block.
    */
 
-  mixinBlock: function() {
+  mixinBlock: function () {
     var tok;
     if ((tok = this.scanEndOfLine(/^block/, 'mixin-block'))) {
       this.tokens.push(this.tokEnd(tok));
@@ -803,7 +788,7 @@ Lexer.prototype = {
    * Yield.
    */
 
-  yield: function() {
+  yield: function () {
     var tok = this.scanEndOfLine(/^yield/, 'yield');
     if (tok) {
       this.tokens.push(this.tokEnd(tok));
@@ -815,7 +800,7 @@ Lexer.prototype = {
    * Include.
    */
 
-  include: function() {
+  include: function () {
     var tok = this.scan(/^include(?=:| |$|\n)/, 'include');
     if (tok) {
       this.tokens.push(this.tokEnd(tok));
@@ -840,7 +825,7 @@ Lexer.prototype = {
    * Path
    */
 
-  path: function() {
+  path: function () {
     var tok = this.scanEndOfLine(/^ ([^\n]+)/, 'path');
     if (tok && (tok.val = tok.val.trim())) {
       this.tokens.push(this.tokEnd(tok));
@@ -852,7 +837,7 @@ Lexer.prototype = {
    * Case.
    */
 
-  case: function() {
+  case: function () {
     var tok = this.scanEndOfLine(/^case +([^\n]+)/, 'case');
     if (tok) {
       this.incrementColumn(-tok.val.length);
@@ -870,7 +855,7 @@ Lexer.prototype = {
    * When.
    */
 
-  when: function() {
+  when: function () {
     var tok = this.scanEndOfLine(/^when +([^:\n]+)/, 'when');
     if (tok) {
       var parser = characterParser.default(tok.val);
@@ -899,7 +884,7 @@ Lexer.prototype = {
    * Default.
    */
 
-  default: function() {
+  default: function () {
     var tok = this.scanEndOfLine(/^default/, 'default');
     if (tok) {
       this.tokens.push(this.tokEnd(tok));
@@ -917,7 +902,7 @@ Lexer.prototype = {
    * Call mixin.
    */
 
-  call: function() {
+  call: function () {
     var tok, captures, increment;
     if ((captures = /^\+(\s*)(([-\w]+)|(#\{))/.exec(this.input))) {
       // try to consume simple or interpolated call
@@ -965,7 +950,7 @@ Lexer.prototype = {
    * Mixin.
    */
 
-  mixin: function() {
+  mixin: function () {
     var captures;
     if ((captures = /^mixin +([-\w]+)(?: *\((.*)\))? */.exec(this.input))) {
       this.consume(captures[0].length);
@@ -981,7 +966,7 @@ Lexer.prototype = {
    * Conditional.
    */
 
-  conditional: function() {
+  conditional: function () {
     var captures;
     if ((captures = /^(if|unless|else if|else)\b([^\n]*)/.exec(this.input))) {
       this.consume(captures[0].length);
@@ -1020,7 +1005,7 @@ Lexer.prototype = {
    * While.
    */
 
-  while: function() {
+  while: function () {
     var captures, tok;
     if ((captures = /^while +([^\n]+)/.exec(this.input))) {
       this.consume(captures[0].length);
@@ -1039,12 +1024,13 @@ Lexer.prototype = {
    * Each.
    */
 
-  each: function() {
+  each: function () {
     var captures;
     if (
-      (captures = /^(?:each|for) +([a-zA-Z_$][\w$]*)(?: *, *([a-zA-Z_$][\w$]*))? * in *([^\n]+)/.exec(
-        this.input
-      ))
+      (captures =
+        /^(?:each|for) +([a-zA-Z_$][\w$]*)(?: *, *([a-zA-Z_$][\w$]*))? * in *([^\n]+)/.exec(
+          this.input
+        ))
     ) {
       this.consume(captures[0].length);
       var tok = this.tok('each', captures[1]);
@@ -1070,9 +1056,10 @@ Lexer.prototype = {
       );
     }
     if (
-      (captures = /^- *(?:each|for) +([a-zA-Z_$][\w$]*)(?: *, *([a-zA-Z_$][\w$]*))? +in +([^\n]+)/.exec(
-        this.input
-      ))
+      (captures =
+        /^- *(?:each|for) +([a-zA-Z_$][\w$]*)(?: *, *([a-zA-Z_$][\w$]*))? +in +([^\n]+)/.exec(
+          this.input
+        ))
     ) {
       this.error(
         'MALFORMED_EACH',
@@ -1085,7 +1072,7 @@ Lexer.prototype = {
    * EachOf.
    */
 
-  eachOf: function() {
+  eachOf: function () {
     var captures;
     if ((captures = /^(?:each|for) (.*?) of *([^\n]+)/.exec(this.input))) {
       this.consume(captures[0].length);
@@ -1114,9 +1101,10 @@ Lexer.prototype = {
       return true;
     }
     if (
-      (captures = /^- *(?:each|for) +([a-zA-Z_$][\w$]*)(?: *, *([a-zA-Z_$][\w$]*))? +of +([^\n]+)/.exec(
-        this.input
-      ))
+      (captures =
+        /^- *(?:each|for) +([a-zA-Z_$][\w$]*)(?: *, *([a-zA-Z_$][\w$]*))? +of +([^\n]+)/.exec(
+          this.input
+        ))
     ) {
       this.error(
         'MALFORMED_EACH',
@@ -1129,7 +1117,7 @@ Lexer.prototype = {
    * Code.
    */
 
-  code: function() {
+  code: function () {
     var captures;
     if ((captures = /^(!?=|-)[ \t]*([^\n]+)/.exec(this.input))) {
       var flags = captures[1];
@@ -1200,7 +1188,7 @@ Lexer.prototype = {
   /**
    * Block code.
    */
-  blockCode: function() {
+  blockCode: function () {
     var tok;
     if ((tok = this.scanEndOfLine(/^-/, 'blockcode'))) {
       this.tokens.push(this.tokEnd(tok));
@@ -1213,7 +1201,7 @@ Lexer.prototype = {
   /**
    * Attribute Name.
    */
-  attribute: function(str) {
+  attribute: function (str) {
     var quote = '';
     var quoteRe = /['"]/;
     var key = '';
@@ -1309,7 +1297,7 @@ Lexer.prototype = {
   /**
    * Attribute Value.
    */
-  attributeValue: function(str) {
+  attributeValue: function (str) {
     var quoteRe = /['"]/;
     var val = '';
     var done, i, x;
@@ -1437,7 +1425,7 @@ Lexer.prototype = {
    * Attributes.
    */
 
-  attrs: function() {
+  attrs: function () {
     var tok;
 
     if ('(' == this.input.charAt(0)) {
@@ -1464,7 +1452,7 @@ Lexer.prototype = {
   /**
    * &attributes block
    */
-  attributesBlock: function() {
+  attributesBlock: function () {
     if (/^&attributes\b/.test(this.input)) {
       var consumed = 11;
       this.consume(consumed);
@@ -1484,7 +1472,7 @@ Lexer.prototype = {
    * Indent | Outdent | Newline.
    */
 
-  indent: function() {
+  indent: function () {
     var captures = this.scanIndentation();
     var tok;
 
@@ -1587,7 +1575,7 @@ Lexer.prototype = {
       while (this.input.length === 0 && tokens[tokens.length - 1] === '')
         tokens.pop();
       tokens.forEach(
-        function(token, i) {
+        function (token, i) {
           var tok;
           this.incrementLine(1);
           if (i !== 0) tok = this.tok('newline');
@@ -1605,7 +1593,7 @@ Lexer.prototype = {
    * Slash.
    */
 
-  slash: function() {
+  slash: function () {
     var tok = this.scan(/^\//, 'slash');
     if (tok) {
       this.tokens.push(this.tokEnd(tok));
@@ -1617,7 +1605,7 @@ Lexer.prototype = {
    * ':'
    */
 
-  colon: function() {
+  colon: function () {
     var tok = this.scan(/^: +/, ':');
     if (tok) {
       this.tokens.push(this.tokEnd(tok));
@@ -1625,14 +1613,14 @@ Lexer.prototype = {
     }
   },
 
-  fail: function() {
+  fail: function () {
     this.error(
       'UNEXPECTED_TEXT',
       'unexpected text "' + this.input.substr(0, 5) + '"'
     );
   },
 
-  callLexerFunction: function(func) {
+  callLexerFunction: function (func) {
     var rest = [];
     for (var i = 1; i < arguments.length; i++) {
       rest.push(arguments[i]);
@@ -1653,7 +1641,7 @@ Lexer.prototype = {
    * @api private
    */
 
-  advance: function() {
+  advance: function () {
     return (
       this.callLexerFunction('blank') ||
       this.callLexerFunction('eos') ||
@@ -1701,7 +1689,7 @@ Lexer.prototype = {
    * @returns {Array.<Token>}
    * @api public
    */
-  getTokens: function() {
+  getTokens: function () {
     while (!this.ended) {
       this.callLexerFunction('advance');
     }

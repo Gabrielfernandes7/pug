@@ -5,18 +5,18 @@ var build = require('../build');
 var wrap = require('../wrap');
 
 function addTest(name, fn) {
-  test(name, function() {
+  test(name, function () {
     fn(runtime[name]);
     fn(Function('', build([name]) + ';return pug_' + name + ';')());
     fn(wrap('function t() {return pug.' + name + ';}', 't')());
   });
 }
 
-addTest('attr', function(attr) {
+addTest('attr', function (attr) {
   // (key, val, escaped, terse)
   var stringToJSON = String.prototype.toJSON;
 
-  String.prototype.toJSON = function() {
+  String.prototype.toJSON = function () {
     return JSON.stringify(this);
   };
 
@@ -57,7 +57,7 @@ addTest('attr', function(attr) {
     attr(
       'key',
       {
-        toJSON: function() {
+        toJSON: function () {
           return 'bar';
         },
       },
@@ -69,7 +69,7 @@ addTest('attr', function(attr) {
     attr(
       'key',
       {
-        toJSON: function() {
+        toJSON: function () {
           return {foo: 'bar'};
         },
       },
@@ -109,7 +109,7 @@ addTest('attr', function(attr) {
   String.prototype.toJSON = stringToJSON;
 });
 
-addTest('attrs', function(attrs) {
+addTest('attrs', function (attrs) {
   // (obj, terse)
   expect(attrs({foo: 'bar'}, true)).toBe(' foo="bar"');
   expect(attrs({foo: 'bar'}, false)).toBe(' foo="bar"');
@@ -133,7 +133,7 @@ addTest('attrs', function(attrs) {
   expect(attrs({style: {foo: 'bar'}}, false)).toBe(' style="foo:bar;"');
 });
 
-addTest('classes', function(classes) {
+addTest('classes', function (classes) {
   expect(classes(['foo', 'bar'])).toBe('foo bar');
   expect(
     classes([
@@ -149,7 +149,7 @@ addTest('classes', function(classes) {
   ).toBe('fo&lt;o bar ba>z');
 });
 
-addTest('escape', function(escape) {
+addTest('escape', function (escape) {
   expect(escape('foo')).toBe('foo');
   expect(escape(10)).toBe(10);
   expect(escape('foo<bar')).toBe('foo&lt;bar');
@@ -159,7 +159,7 @@ addTest('escape', function(escape) {
   expect(escape('foo&<>"bar"')).toBe('foo&amp;&lt;&gt;&quot;bar&quot;');
 });
 
-addTest('merge', function(merge) {
+addTest('merge', function (merge) {
   expect(merge({foo: 'bar'}, {baz: 'bash'})).toEqual({foo: 'bar', baz: 'bash'});
   expect(merge([{foo: 'bar'}, {baz: 'bash'}, {bing: 'bong'}])).toEqual({
     foo: 'bar',
@@ -213,7 +213,7 @@ addTest('merge', function(merge) {
   expect(merge({}, {style: 'baz:bash'})).toEqual({style: 'baz:bash;'});
 });
 
-addTest('style', function(style) {
+addTest('style', function (style) {
   expect(style(null)).toBe('');
   expect(style('')).toBe('');
   expect(style('foo: bar')).toBe('foo: bar');

@@ -44,12 +44,12 @@ function link(ast) {
     var parent = link(extendsNode.file.ast);
     extend(parent.declaredBlocks, ast);
     var foundBlockNames = [];
-    walk(parent, function(node) {
+    walk(parent, function (node) {
       if (node.type === 'NamedBlock') {
         foundBlockNames.push(node.name);
       }
     });
-    expectedBlocks.forEach(function(expectedBlock) {
+    expectedBlocks.forEach(function (expectedBlock) {
       if (foundBlockNames.indexOf(expectedBlock.name) === -1) {
         error(
           'UNEXPECTED_BLOCK',
@@ -58,7 +58,7 @@ function link(ast) {
         );
       }
     });
-    Object.keys(ast.declaredBlocks).forEach(function(name) {
+    Object.keys(ast.declaredBlocks).forEach(function (name) {
       parent.declaredBlocks[name] = ast.declaredBlocks[name];
     });
     parent.nodes = mixins.concat(parent.nodes);
@@ -81,7 +81,7 @@ function findDeclaredBlocks(ast) /*: {[name: string]: Array<BlockNode>}*/ {
 
 function flattenParentBlocks(parentBlocks, accumulator) {
   accumulator = accumulator || [];
-  parentBlocks.forEach(function(parentBlock) {
+  parentBlocks.forEach(function (parentBlock) {
     if (parentBlock.parents) {
       flattenParentBlocks(parentBlock.parents, accumulator);
     }
@@ -105,7 +105,7 @@ function extend(parentBlocks, ast) {
           : [];
         if (parentBlockList.length) {
           node.parents = parentBlockList;
-          parentBlockList.forEach(function(parentBlock) {
+          parentBlockList.forEach(function (parentBlock) {
             switch (node.mode) {
               case 'append':
                 parentBlock.nodes = parentBlock.nodes.concat(node.nodes);
@@ -149,7 +149,7 @@ function applyIncludes(ast, child) {
   );
 }
 function removeBlocks(ast) {
-  return walk(ast, function(node, replace) {
+  return walk(ast, function (node, replace) {
     if (node.type === 'NamedBlock') {
       replace({
         type: 'Block',
@@ -162,7 +162,7 @@ function removeBlocks(ast) {
 function applyYield(ast, block) {
   if (!block || !block.nodes.length) return ast;
   var replaced = false;
-  ast = walk(ast, null, function(node, replace) {
+  ast = walk(ast, null, function (node, replace) {
     if (node.type === 'YieldBlock') {
       replaced = true;
       node.type = 'Block';
@@ -190,7 +190,7 @@ function applyYield(ast, block) {
 
 function checkExtendPosition(ast, hasExtends) {
   var legitExtendsReached = false;
-  walk(ast, function(node) {
+  walk(ast, function (node) {
     if (node.type === 'Extends') {
       if (hasExtends && !legitExtendsReached) {
         legitExtendsReached = true;

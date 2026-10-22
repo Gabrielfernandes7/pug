@@ -17,7 +17,7 @@ test('pug-load', () => {
 
   ast = walk(
     ast,
-    function(node) {
+    function (node) {
       if (node.filename)
         node.filename = '<dirname>/' + path.basename(node.filename);
       if (node.fullPath)

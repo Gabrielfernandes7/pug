@@ -25,24 +25,24 @@ function getFileError(name, options) {
   throw new Error('Input was supposed to result in an error.');
 }
 
-describe('error reporting', function() {
-  describe('compile time errors', function() {
-    describe('with no filename', function() {
-      it('includes detail of where the error was thrown', function() {
+describe('error reporting', function () {
+  describe('compile time errors', function () {
+    describe('with no filename', function () {
+      it('includes detail of where the error was thrown', function () {
         var err = getError('foo(');
         expect(err.message).toMatch(/Pug:1/);
         expect(err.message).toMatch(/foo\(/);
       });
     });
-    describe('with a filename', function() {
-      it('includes detail of where the error was thrown including the filename', function() {
+    describe('with a filename', function () {
+      it('includes detail of where the error was thrown including the filename', function () {
         var err = getError('foo(', {filename: 'test.pug'});
         expect(err.message).toMatch(/test\.pug:1/);
         expect(err.message).toMatch(/foo\(/);
       });
     });
-    describe('with a layout without block declaration (syntax)', function() {
-      it('includes detail of where the error was thrown including the filename', function() {
+    describe('with a layout without block declaration (syntax)', function () {
+      it('includes detail of where the error was thrown including the filename', function () {
         var err = getFileError(
           __dirname + '/fixtures/compile.with.layout.syntax.error.pug',
           {}
@@ -51,8 +51,8 @@ describe('error reporting', function() {
         expect(err.message).toMatch(/foo\(/);
       });
     });
-    describe('with a layout without block declaration (locals)', function() {
-      it('includes detail of where the error was thrown including the filename', function() {
+    describe('with a layout without block declaration (locals)', function () {
+      it('includes detail of where the error was thrown including the filename', function () {
         var err = getFileError(
           __dirname + '/fixtures/compile.with.layout.locals.error.pug',
           {}
@@ -61,8 +61,8 @@ describe('error reporting', function() {
         expect(err.message).toMatch(/is not a function/);
       });
     });
-    describe('with a include (syntax)', function() {
-      it('includes detail of where the error was thrown including the filename', function() {
+    describe('with a include (syntax)', function () {
+      it('includes detail of where the error was thrown including the filename', function () {
         var err = getFileError(
           __dirname + '/fixtures/compile.with.include.syntax.error.pug',
           {}
@@ -71,8 +71,8 @@ describe('error reporting', function() {
         expect(err.message).toMatch(/foo\(/);
       });
     });
-    describe('with a include (locals)', function() {
-      it('includes detail of where the error was thrown including the filename', function() {
+    describe('with a include (locals)', function () {
+      it('includes detail of where the error was thrown including the filename', function () {
         var err = getFileError(
           __dirname + '/fixtures/compile.with.include.locals.error.pug',
           {}
@@ -81,7 +81,7 @@ describe('error reporting', function() {
         expect(err.message).toMatch(/foo\(/);
       });
 
-      it('handles compileDebug option properly', function() {
+      it('handles compileDebug option properly', function () {
         var err = getFileError(
           __dirname + '/fixtures/compile.with.include.locals.error.pug',
           {
@@ -93,8 +93,8 @@ describe('error reporting', function() {
       });
     });
 
-    describe('with a layout (without block) with an include (syntax)', function() {
-      it('includes detail of where the error was thrown including the filename', function() {
+    describe('with a layout (without block) with an include (syntax)', function () {
+      it('includes detail of where the error was thrown including the filename', function () {
         var err = getFileError(
           __dirname +
             '/fixtures/compile.with.layout.with.include.syntax.error.pug',
@@ -104,8 +104,8 @@ describe('error reporting', function() {
         expect(err.message).toMatch(/foo\(/);
       });
     });
-    describe('with a layout (without block) with an include (locals)', function() {
-      it('includes detail of where the error was thrown including the filename', function() {
+    describe('with a layout (without block) with an include (locals)', function () {
+      it('includes detail of where the error was thrown including the filename', function () {
         var err = getFileError(
           __dirname +
             '/fixtures/compile.with.layout.with.include.locals.error.pug',
@@ -115,8 +115,8 @@ describe('error reporting', function() {
         expect(err.message).toMatch(/foo\(/);
       });
     });
-    describe('block that is never actually used', function() {
-      it('includes detail of where the error was thrown including the filename', function() {
+    describe('block that is never actually used', function () {
+      it('includes detail of where the error was thrown including the filename', function () {
         var err = getFileError(
           __dirname + '/fixtures/invalid-block-in-extends.pug',
           {}
@@ -125,22 +125,22 @@ describe('error reporting', function() {
         expect(err.message).toMatch(/content/);
       });
     });
-    describe('Unexpected character', function() {
-      it('includes details of where the error was thrown', function() {
+    describe('Unexpected character', function () {
+      it('includes details of where the error was thrown', function () {
         var err = getError('ul?', {});
         expect(err.message).toMatch(/unexpected text \"\?\"/);
       });
     });
-    describe('Include filtered', function() {
-      it('includes details of where the error was thrown', function() {
+    describe('Include filtered', function () {
+      it('includes details of where the error was thrown', function () {
         var err = getError('include:verbatim()!', {});
         assert(err.message.indexOf('unexpected text "!"') !== -1);
         var err = getError('include:verbatim ', {});
         assert(err.message.indexOf('missing path for include') !== -1);
       });
     });
-    describe('mixin block followed by a lot of blank lines', function() {
-      it('reports the correct line number', function() {
+    describe('mixin block followed by a lot of blank lines', function () {
+      it('reports the correct line number', function () {
         var err = getError('mixin test\n    block\n\ndiv()Test');
         var line = /Pug\:(\d+)/.exec(err.message);
         assert(line, 'Line number must be included in error message');
@@ -151,23 +151,23 @@ describe('error reporting', function() {
       });
     });
   });
-  describe('runtime errors', function() {
-    describe('with no filename and `compileDebug` left undefined', function() {
-      it('just reports the line number', function() {
+  describe('runtime errors', function () {
+    describe('with no filename and `compileDebug` left undefined', function () {
+      it('just reports the line number', function () {
         var sentinel = new Error('sentinel');
         var err = getError('-foo()', {
-          foo: function() {
+          foo: function () {
             throw sentinel;
           },
         });
         expect(err.message).toMatch(/on line 1/);
       });
     });
-    describe('with no filename and `compileDebug` set to `true`', function() {
-      it('includes detail of where the error was thrown', function() {
+    describe('with no filename and `compileDebug` set to `true`', function () {
+      it('includes detail of where the error was thrown', function () {
         var sentinel = new Error('sentinel');
         var err = getError('-foo()', {
-          foo: function() {
+          foo: function () {
             throw sentinel;
           },
           compileDebug: true,
@@ -176,11 +176,11 @@ describe('error reporting', function() {
         expect(err.message).toMatch(/-foo\(\)/);
       });
     });
-    describe('with a filename that does not correspond to a real file and `compileDebug` left undefined', function() {
-      it('just reports the line number', function() {
+    describe('with a filename that does not correspond to a real file and `compileDebug` left undefined', function () {
+      it('just reports the line number', function () {
         var sentinel = new Error('sentinel');
         var err = getError('-foo()', {
-          foo: function() {
+          foo: function () {
             throw sentinel;
           },
           filename: 'fake.pug',
@@ -188,12 +188,12 @@ describe('error reporting', function() {
         expect(err.message).toMatch(/on line 1/);
       });
     });
-    describe('with a filename that corresponds to a real file and `compileDebug` left undefined', function() {
-      it('includes detail of where the error was thrown including the filename', function() {
+    describe('with a filename that corresponds to a real file and `compileDebug` left undefined', function () {
+      it('includes detail of where the error was thrown including the filename', function () {
         var sentinel = new Error('sentinel');
         var path = __dirname + '/fixtures/runtime.error.pug';
         var err = getError(fs.readFileSync(path, 'utf8'), {
-          foo: function() {
+          foo: function () {
             throw sentinel;
           },
           filename: path,
@@ -202,8 +202,8 @@ describe('error reporting', function() {
         expect(err.message).toMatch(/-foo\(\)/);
       });
     });
-    describe('in a mixin', function() {
-      it('includes detail of where the error was thrown including the filename', function() {
+    describe('in a mixin', function () {
+      it('includes detail of where the error was thrown including the filename', function () {
         var err = getFileError(
           __dirname + '/fixtures/runtime.with.mixin.error.pug',
           {}
@@ -212,8 +212,8 @@ describe('error reporting', function() {
         expect(err.message).toMatch(/Cannot read propert(y|ies).* of null/);
       });
     });
-    describe('in a layout', function() {
-      it('includes detail of where the error was thrown including the filename', function() {
+    describe('in a layout', function () {
+      it('includes detail of where the error was thrown including the filename', function () {
         var err = getFileError(
           __dirname + '/fixtures/runtime.layout.error.pug',
           {}
@@ -225,11 +225,11 @@ describe('error reporting', function() {
       });
     });
   });
-  describe('deprecated features', function() {
-    it('warns about element-with-multiple-attributes', function() {
+  describe('deprecated features', function () {
+    it('warns about element-with-multiple-attributes', function () {
       var consoleWarn = console.warn;
       var log = '';
-      console.warn = function(str) {
+      console.warn = function (str) {
         log += str;
       };
       var res = pug.renderFile(
@@ -243,14 +243,14 @@ describe('error reporting', function() {
       expect(res).toBe('<div attr="val" foo="bar"></div>');
     });
   });
-  describe("if you throw something that isn't an error", function() {
-    it('just rethrows without modification', function() {
+  describe("if you throw something that isn't an error", function () {
+    it('just rethrows without modification', function () {
       var err = getError('- throw "foo"');
       expect(err).toBe('foo');
     });
   });
-  describe('import without a filename for a basedir', function() {
-    it('throws an error', function() {
+  describe('import without a filename for a basedir', function () {
+    it('throws an error', function () {
       var err = getError('include foo.pug');
       expect(err.message).toMatch(/the "filename" option is required to use/);
       var err = getError('include /foo.pug');

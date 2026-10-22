@@ -75,7 +75,7 @@ function pug_rethrow(e, n, r, t) {
   }
   (o = a
     .slice(i, s)
-    .map(function(e, n) {
+    .map(function (e, n) {
       var t = n + i + 1;
       return (t == r ? \\"  > \\" : \\"    \\") + t + \\"| \\" + e;
     })

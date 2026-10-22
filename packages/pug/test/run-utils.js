@@ -5,7 +5,7 @@ var uglify = require('uglify-js');
 var mkdirp = require('mkdirp').sync;
 
 var filters = {
-  custom: function(str, options) {
+  custom: function (str, options) {
     assert(options.opt === 'val');
     assert(options.num === 2);
     return 'BEGIN' + str + 'END';
@@ -30,17 +30,17 @@ function writeFileSync(filename, data) {
 function findCases(dir) {
   return fs
     .readdirSync(dir)
-    .filter(function(file) {
+    .filter(function (file) {
       return ~file.indexOf('.pug');
     })
-    .map(function(file) {
+    .map(function (file) {
       return file.replace('.pug', '');
     });
 }
 
 function testSingle(it, suffix, test) {
   var name = test.replace(/[-.]/g, ' ');
-  it(name, function() {
+  it(name, function () {
     var path = __dirname + '/cases' + suffix + '/' + test + '.pug';
     var str = fs.readFileSync(path, 'utf8');
     var fn = pug.compile(str, {
