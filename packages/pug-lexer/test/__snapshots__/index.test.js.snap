@@ -2207,7 +2207,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -3080,7 +3080,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -4485,7 +4485,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -4560,7 +4560,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -5161,7 +5161,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -5191,7 +5191,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -5312,7 +5312,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -5653,7 +5653,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -5711,21 +5711,6 @@ Array [
       },
     },
     "type": "newline",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 5,
-        "line": 9,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/block-code.pug",
-      "start": Object {
-        "column": 5,
-        "line": 9,
-      },
-    },
-    "type": "text",
-    "val": "",
   },
   Object {
     "loc": Object {
@@ -5906,7 +5891,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -6221,7 +6206,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -6387,7 +6372,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -6417,7 +6402,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -6583,7 +6568,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -6739,7 +6724,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "buffer": false,
@@ -6800,7 +6785,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -6890,7 +6875,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "buffer": false,
@@ -6979,7 +6964,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -7009,7 +6994,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 12,
+    "val": "12",
   },
   Object {
     "loc": Object {
@@ -7157,7 +7142,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 16,
+    "val": "16",
   },
   Object {
     "loc": Object {
@@ -7188,7 +7173,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 20,
+    "val": "20",
   },
   Object {
     "loc": Object {
@@ -7337,7 +7322,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -7367,7 +7352,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "buffer": false,
@@ -7428,7 +7413,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -7739,7 +7724,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -7798,7 +7783,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -7871,7 +7856,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -8022,7 +8007,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -8245,7 +8230,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -8275,7 +8260,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "buffer": false,
@@ -8336,7 +8321,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -8366,7 +8351,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -8440,7 +8425,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -8513,7 +8498,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -9344,7 +9329,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -9420,7 +9405,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -9496,7 +9481,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -9572,7 +9557,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -9677,7 +9662,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -9839,7 +9824,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -9913,7 +9898,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -9987,7 +9972,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -10061,7 +10046,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -10091,7 +10076,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -10238,7 +10223,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -10297,7 +10282,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -10414,7 +10399,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -10473,7 +10458,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -10532,7 +10517,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -10752,7 +10737,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "buffer": false,
@@ -10784,7 +10769,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -10922,7 +10907,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "code": "items",
@@ -10954,7 +10939,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -11089,7 +11074,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "code": "items",
@@ -11121,7 +11106,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -11211,7 +11196,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "code": "items",
@@ -11243,7 +11228,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -11395,7 +11380,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "code": "letters",
@@ -11427,7 +11412,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "code": "nums",
@@ -11459,7 +11444,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -11657,7 +11642,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "code": "counter()",
@@ -11689,7 +11674,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -12447,7 +12432,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "buffer": true,
@@ -12697,21 +12682,6 @@ Array [
         "line": 12,
       },
     },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
-        "line": 12,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/comments.pug",
-      "start": Object {
-        "column": 1,
-        "line": 12,
-      },
-    },
     "type": "end-pipeless-text",
   },
   Object {
@@ -12815,21 +12785,6 @@ Array [
       },
     },
     "type": "newline",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
-        "line": 16,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/comments.pug",
-      "start": Object {
-        "column": 1,
-        "line": 16,
-      },
-    },
-    "type": "text",
-    "val": "",
   },
   Object {
     "loc": Object {
@@ -12988,21 +12943,6 @@ Array [
         "line": 21,
       },
     },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
-        "line": 21,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/comments.pug",
-      "start": Object {
-        "column": 1,
-        "line": 21,
-      },
-    },
     "type": "end-pipeless-text",
   },
   Object {
@@ -13135,21 +13075,6 @@ Array [
       },
     },
     "type": "newline",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
-        "line": 26,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/comments.pug",
-      "start": Object {
-        "column": 1,
-        "line": 26,
-      },
-    },
-    "type": "text",
-    "val": "",
   },
   Object {
     "loc": Object {
@@ -13330,21 +13255,6 @@ Array [
       },
     },
     "type": "newline",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
-        "line": 3,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/comments.source.pug",
-      "start": Object {
-        "column": 1,
-        "line": 3,
-      },
-    },
-    "type": "text",
-    "val": "",
   },
   Object {
     "loc": Object {
@@ -13597,7 +13507,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -13627,7 +13537,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 3,
+    "val": "3",
   },
   Object {
     "buffer": false,
@@ -13688,7 +13598,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 5,
+    "val": "5",
   },
   Object {
     "buffer": false,
@@ -13748,7 +13658,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 7,
+    "val": "7",
   },
   Object {
     "loc": Object {
@@ -13822,7 +13732,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 7,
+    "val": "7",
   },
   Object {
     "loc": Object {
@@ -14029,7 +13939,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -14059,7 +13969,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -14245,7 +14155,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "code": "users",
@@ -14277,7 +14187,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -14353,7 +14263,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -14472,7 +14382,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -14502,7 +14412,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "code": "users",
@@ -14534,7 +14444,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -14610,7 +14520,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -14743,7 +14653,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "code": "user",
@@ -14775,7 +14685,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -14883,7 +14793,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -15002,7 +14912,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "code": "user",
@@ -15034,7 +14944,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -15142,7 +15052,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -15292,7 +15202,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "code": "user",
@@ -15324,7 +15234,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -15432,7 +15342,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -15551,7 +15461,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "code": "ofKeyword",
@@ -15583,7 +15493,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -15673,7 +15583,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "code": "[\\"variable with of keyword\\"]",
@@ -15705,7 +15615,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -15943,7 +15853,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -15973,7 +15883,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -16047,7 +15957,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -16077,7 +15987,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 12,
+    "val": "12",
   },
   Object {
     "buffer": false,
@@ -16795,7 +16705,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -17062,7 +16972,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -17092,7 +17002,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -17246,21 +17156,6 @@ Array [
   Object {
     "loc": Object {
       "end": Object {
-        "column": 1,
-        "line": 6,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/filters.custom.pug",
-      "start": Object {
-        "column": 1,
-        "line": 6,
-      },
-    },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
         "column": 7,
         "line": 7,
       },
@@ -17376,7 +17271,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -17406,7 +17301,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -17436,7 +17331,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -17633,7 +17528,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -17663,7 +17558,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -17751,7 +17646,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -17884,7 +17779,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -18201,7 +18096,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -18231,7 +18126,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -18306,7 +18201,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -18542,7 +18437,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -18572,7 +18467,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -18736,7 +18631,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -18911,7 +18806,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -19120,7 +19015,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -19150,7 +19045,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -19225,7 +19120,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -19418,7 +19313,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 1,
+    "val": "1",
   },
   Object {
     "loc": Object {
@@ -19448,7 +19343,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -19643,7 +19538,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "code": "users",
@@ -19675,7 +19570,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -19750,7 +19645,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -19887,7 +19782,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -20611,7 +20506,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -20731,7 +20626,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -21133,7 +21028,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -21163,7 +21058,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -21193,7 +21088,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -21237,7 +21132,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -21477,7 +21372,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -21521,7 +21416,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -21732,7 +21627,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -21999,7 +21894,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -22160,7 +22055,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -22281,7 +22176,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -22311,7 +22206,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -22484,7 +22379,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -22621,7 +22516,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -22651,7 +22546,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -22682,7 +22577,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -23039,7 +22934,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -23144,7 +23039,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -23263,7 +23158,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -23444,7 +23339,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -23595,7 +23490,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -23625,7 +23520,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -23730,7 +23625,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "args": "\\"The meaning of life\\"",
@@ -23761,7 +23656,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -23926,7 +23821,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -24031,7 +23926,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -24212,7 +24107,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -24363,7 +24258,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -24468,7 +24363,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -24663,7 +24558,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -24768,7 +24663,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -25299,21 +25194,6 @@ Array [
   Object {
     "loc": Object {
       "end": Object {
-        "column": 16,
-        "line": 5,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/inline-tag.pug",
-      "start": Object {
-        "column": 16,
-        "line": 5,
-      },
-    },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
         "column": 3,
         "line": 6,
       },
@@ -25403,21 +25283,6 @@ Array [
   Object {
     "loc": Object {
       "end": Object {
-        "column": 21,
-        "line": 6,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/inline-tag.pug",
-      "start": Object {
-        "column": 21,
-        "line": 6,
-      },
-    },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
         "column": 3,
         "line": 7,
       },
@@ -25492,21 +25357,6 @@ Array [
   Object {
     "loc": Object {
       "end": Object {
-        "column": 24,
-        "line": 7,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/inline-tag.pug",
-      "start": Object {
-        "column": 24,
-        "line": 7,
-      },
-    },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
         "column": 3,
         "line": 8,
       },
@@ -25546,21 +25396,6 @@ Array [
       },
     },
     "type": "newline",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
-        "line": 9,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/inline-tag.pug",
-      "start": Object {
-        "column": 1,
-        "line": 9,
-      },
-    },
-    "type": "text",
-    "val": "",
   },
   Object {
     "loc": Object {
@@ -25618,7 +25453,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -25725,21 +25560,6 @@ Array [
   Object {
     "loc": Object {
       "end": Object {
-        "column": 18,
-        "line": 12,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/inline-tag.pug",
-      "start": Object {
-        "column": 18,
-        "line": 12,
-      },
-    },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
         "column": 3,
         "line": 13,
       },
@@ -25829,21 +25649,6 @@ Array [
   Object {
     "loc": Object {
       "end": Object {
-        "column": 23,
-        "line": 13,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/inline-tag.pug",
-      "start": Object {
-        "column": 23,
-        "line": 13,
-      },
-    },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
         "column": 3,
         "line": 14,
       },
@@ -25914,21 +25719,6 @@ Array [
       },
     },
     "type": "end-pug-interpolation",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 26,
-        "line": 14,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/inline-tag.pug",
-      "start": Object {
-        "column": 26,
-        "line": 14,
-      },
-    },
-    "type": "text",
-    "val": "",
   },
   Object {
     "loc": Object {
@@ -26117,21 +25907,6 @@ Array [
       },
     },
     "type": "end-pug-interpolation",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 23,
-        "line": 19,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/inline-tag.pug",
-      "start": Object {
-        "column": 23,
-        "line": 19,
-      },
-    },
-    "type": "text",
-    "val": "",
   },
   Object {
     "loc": Object {
@@ -26334,21 +26109,6 @@ Array [
   Object {
     "loc": Object {
       "end": Object {
-        "column": 61,
-        "line": 1,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/intepolated-elements.pug",
-      "start": Object {
-        "column": 61,
-        "line": 1,
-      },
-    },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
         "column": 1,
         "line": 2,
       },
@@ -26509,21 +26269,6 @@ Array [
       },
     },
     "type": "end-pug-interpolation",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 54,
-        "line": 2,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/intepolated-elements.pug",
-      "start": Object {
-        "column": 54,
-        "line": 2,
-      },
-    },
-    "type": "text",
-    "val": "",
   },
   Object {
     "loc": Object {
@@ -26716,21 +26461,6 @@ Array [
         "line": 3,
       },
     },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 71,
-        "line": 3,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/intepolated-elements.pug",
-      "start": Object {
-        "column": 71,
-        "line": 3,
-      },
-    },
     "type": "eos",
   },
 ]
@@ -26776,7 +26506,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -27036,7 +26766,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -27312,7 +27042,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -27567,7 +27297,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -27808,7 +27538,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 1,
+    "val": "1",
   },
   Object {
     "loc": Object {
@@ -27913,7 +27643,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 1,
+    "val": "1",
   },
   Object {
     "loc": Object {
@@ -28018,7 +27748,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 1,
+    "val": "1",
   },
   Object {
     "loc": Object {
@@ -28123,7 +27853,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 1,
+    "val": "1",
   },
   Object {
     "loc": Object {
@@ -28228,7 +27958,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 1,
+    "val": "1",
   },
   Object {
     "loc": Object {
@@ -28333,7 +28063,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 1,
+    "val": "1",
   },
   Object {
     "loc": Object {
@@ -28514,7 +28244,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -28769,7 +28499,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -29012,7 +28742,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -29102,7 +28832,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "buffer": false,
@@ -29134,7 +28864,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -29285,7 +29015,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -29315,7 +29045,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -29477,7 +29207,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -29522,7 +29252,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "args": "title",
@@ -29583,7 +29313,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -29670,7 +29400,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -29730,7 +29460,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -29802,7 +29532,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "args": null,
@@ -29908,7 +29638,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -30075,7 +29805,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -30195,7 +29925,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -30381,7 +30111,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -30531,7 +30261,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -30916,7 +30646,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -31100,7 +30830,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -31475,7 +31205,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -31520,7 +31250,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -31638,7 +31368,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -31668,7 +31398,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "args": "'Foo'",
@@ -31787,7 +31517,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -31832,7 +31562,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -31908,7 +31638,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -31994,7 +31724,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -32024,7 +31754,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "args": "'Something'",
@@ -32305,7 +32035,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -32397,7 +32127,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "buffer": false,
@@ -32608,7 +32338,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -32638,7 +32368,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "args": "'GET', '/search'",
@@ -32669,7 +32399,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -32926,7 +32656,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -32956,7 +32686,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "args": "'POST', '/search'",
@@ -32987,7 +32717,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -33244,7 +32974,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -33274,7 +33004,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "args": "'POST', '/search'",
@@ -33349,7 +33079,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -33379,7 +33109,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -33452,7 +33182,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -33482,7 +33212,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "args": null,
@@ -33513,7 +33243,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -33600,7 +33330,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -33763,7 +33493,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -33793,7 +33523,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -33918,7 +33648,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -34289,7 +34019,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "args": null,
@@ -34832,7 +34562,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -34926,7 +34656,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -34956,7 +34686,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -35029,7 +34759,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -35122,7 +34852,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -35198,7 +34928,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -35228,7 +34958,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "args": null,
@@ -35430,7 +35160,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -35460,7 +35190,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -35612,7 +35342,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -35642,7 +35372,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -35793,7 +35523,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -35867,7 +35597,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "args": "'This',
@@ -35943,7 +35673,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -35973,7 +35703,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -36149,7 +35879,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "args": "",
@@ -36240,7 +35970,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -36412,7 +36142,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -36442,7 +36172,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "code": "items",
@@ -36474,7 +36204,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -36628,7 +36358,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -36868,7 +36598,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -36986,7 +36716,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -37016,7 +36746,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -37398,21 +37128,6 @@ Array [
   Object {
     "loc": Object {
       "end": Object {
-        "column": 1,
-        "line": 3,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/pipeless-filters.pug",
-      "start": Object {
-        "column": 1,
-        "line": 3,
-      },
-    },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
         "column": 3,
         "line": 4,
       },
@@ -37648,21 +37363,6 @@ Array [
         "line": 3,
       },
     },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 29,
-        "line": 3,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/pipeless-tag.pug",
-      "start": Object {
-        "column": 29,
-        "line": 3,
-      },
-    },
     "type": "end-pipeless-text",
   },
   Object {
@@ -37826,21 +37526,6 @@ Array [
         "line": 5,
       },
     },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
-        "line": 5,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/pre.pug",
-      "start": Object {
-        "column": 1,
-        "line": 5,
-      },
-    },
     "type": "end-pipeless-text",
   },
   Object {
@@ -37885,7 +37570,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -38297,7 +37982,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -38495,21 +38180,6 @@ Array [
     "loc": Object {
       "end": Object {
         "column": 3,
-        "line": 5,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/script.whitespace.pug",
-      "start": Object {
-        "column": 3,
-        "line": 5,
-      },
-    },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 3,
         "line": 6,
       },
       "filename": "<basedir>/packages/pug-lexer/test/cases/script.whitespace.pug",
@@ -38656,7 +38326,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -38686,7 +38356,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -39353,7 +39023,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -39383,7 +39053,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -39538,7 +39208,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -39647,7 +39317,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -39858,7 +39528,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -39888,7 +39558,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -40062,7 +39732,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -40329,7 +39999,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -41109,7 +40779,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -41139,7 +40809,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -41169,7 +40839,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -41214,7 +40884,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -41375,7 +41045,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -41420,7 +41090,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 8,
+    "val": "8",
   },
   Object {
     "loc": Object {
@@ -41609,7 +41279,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "args": "'contact'",
@@ -41823,7 +41493,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -42050,7 +41720,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -42968,7 +42638,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -42998,7 +42668,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -43485,7 +43155,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -43544,21 +43214,6 @@ Array [
       },
     },
     "type": "newline",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 4,
-        "line": 10,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/text.pug",
-      "start": Object {
-        "column": 4,
-        "line": 10,
-      },
-    },
-    "type": "text",
-    "val": "",
   },
   Object {
     "loc": Object {
@@ -43708,21 +43363,6 @@ Array [
     "loc": Object {
       "end": Object {
         "column": 1,
-        "line": 16,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/text.pug",
-      "start": Object {
-        "column": 1,
-        "line": 16,
-      },
-    },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
         "line": 17,
       },
       "filename": "<basedir>/packages/pug-lexer/test/cases/text.pug",
@@ -43732,21 +43372,6 @@ Array [
       },
     },
     "type": "newline",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
-        "line": 17,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/text.pug",
-      "start": Object {
-        "column": 1,
-        "line": 17,
-      },
-    },
-    "type": "text",
-    "val": "",
   },
   Object {
     "loc": Object {
@@ -43819,21 +43444,6 @@ Array [
       },
     },
     "type": "newline",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
-        "line": 20,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/text.pug",
-      "start": Object {
-        "column": 1,
-        "line": 20,
-      },
-    },
-    "type": "text",
-    "val": "",
   },
   Object {
     "loc": Object {
@@ -43952,21 +43562,6 @@ Array [
     "loc": Object {
       "end": Object {
         "column": 1,
-        "line": 25,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/text.pug",
-      "start": Object {
-        "column": 1,
-        "line": 25,
-      },
-    },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
         "line": 26,
       },
       "filename": "<basedir>/packages/pug-lexer/test/cases/text.pug",
@@ -43976,21 +43571,6 @@ Array [
       },
     },
     "type": "newline",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
-        "line": 26,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/text.pug",
-      "start": Object {
-        "column": 1,
-        "line": 26,
-      },
-    },
-    "type": "text",
-    "val": "",
   },
   Object {
     "loc": Object {
@@ -44076,21 +43656,6 @@ Array [
         "line": 29,
       },
     },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
-        "line": 29,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/text.pug",
-      "start": Object {
-        "column": 1,
-        "line": 29,
-      },
-    },
     "type": "end-pipeless-text",
   },
   Object {
@@ -44135,7 +43700,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -44424,21 +43989,6 @@ Array [
         "line": 41,
       },
     },
-    "type": "text",
-    "val": "",
-  },
-  Object {
-    "loc": Object {
-      "end": Object {
-        "column": 1,
-        "line": 41,
-      },
-      "filename": "<basedir>/packages/pug-lexer/test/cases/text.pug",
-      "start": Object {
-        "column": 1,
-        "line": 41,
-      },
-    },
     "type": "end-pipeless-text",
   },
   Object {
@@ -44675,7 +44225,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -44811,7 +44361,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -45212,7 +44762,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -45242,7 +44792,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "buffer": false,
@@ -45557,7 +45107,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -45587,7 +45137,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -45631,7 +45181,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -45856,7 +45406,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -45886,7 +45436,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -45930,7 +45480,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -46155,7 +45705,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -46287,7 +45837,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -46424,7 +45974,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -46649,7 +46199,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -46679,7 +46229,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {
@@ -46723,7 +46273,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 6,
+    "val": "6",
   },
   Object {
     "loc": Object {
@@ -46829,7 +46379,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 2,
+    "val": "2",
   },
   Object {
     "loc": Object {
@@ -46859,7 +46409,7 @@ Array [
       },
     },
     "type": "indent",
-    "val": 4,
+    "val": "4",
   },
   Object {
     "loc": Object {

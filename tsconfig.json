@@ -5,6 +5,7 @@
     "declaration": true,
     "sourceMap": true,
     "strict": true,
+    "esModuleInterop": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
     "noImplicitReturns": true,
