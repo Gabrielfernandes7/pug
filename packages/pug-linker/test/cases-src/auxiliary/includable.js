@@ -1,4 +1,4 @@
-var STRING_SUBSTITUTIONS = {
+const STRING_SUBSTITUTIONS = {
   // table of character substitutions
   '\t': '\\t',
   '\r': '\\r',

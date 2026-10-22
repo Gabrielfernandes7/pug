@@ -1,9 +1,7 @@
-'use strict';
-
-var assert = require('assert');
-var constantinople = require('constantinople');
-var runtime = require('pug-runtime');
-var stringify = require('js-stringify');
+const assert = require('assert');
+const constantinople = require('constantinople');
+const runtime = require('pug-runtime');
+const stringify = require('js-stringify');
 
 function isConstant(src) {
   return constantinople(src, {pug: runtime, pug_interp: undefined});
@@ -22,15 +20,14 @@ module.exports = compileAttrs;
 function compileAttrs(attrs, options) {
   assert(Array.isArray(attrs), 'Attrs should be an array');
   assert(
-    attrs.every(function (attr) {
-      return (
+    attrs.every(
+      (attr) =>
         attr &&
         typeof attr === 'object' &&
         typeof attr.name === 'string' &&
         (typeof attr.val === 'string' || typeof attr.val === 'boolean') &&
         typeof attr.mustEscape === 'boolean'
-      );
-    }),
+    ),
     'All attributes should be supplied as an object of the form {name, val, mustEscape}'
   );
   assert(options && typeof options === 'object', 'Options should be an object');
@@ -47,17 +44,17 @@ function compileAttrs(attrs, options) {
     'Options.format should be "html" or "object"'
   );
 
-  var buf = [];
-  var classes = [];
-  var classEscaping = [];
+  let buf = [];
+  let classes = [];
+  const classEscaping = [];
 
   function addAttribute(key, val, mustEscape, buf) {
     if (isConstant(val)) {
       if (options.format === 'html') {
-        var str = stringify(
+        const str = stringify(
           runtime.attr(key, toConstant(val), mustEscape, options.terse)
         );
-        var last = buf[buf.length - 1];
+        const last = buf[buf.length - 1];
         if (last && last[last.length - 1] === str[0]) {
           buf[buf.length - 1] = last.substr(0, last.length - 1) + str.substr(1);
         } else {
@@ -68,35 +65,26 @@ function compileAttrs(attrs, options) {
         if (mustEscape) {
           val = runtime.escape(val);
         }
-        buf.push(stringify(key) + ': ' + stringify(val));
+        buf.push(`${stringify(key)}: ${stringify(val)}`);
       }
+    } else if (options.format === 'html') {
+      buf.push(
+        `${options.runtime('attr')}("${key}", ${val}, ${stringify(
+          mustEscape
+        )}, ${stringify(options.terse)})`
+      );
     } else {
-      if (options.format === 'html') {
-        buf.push(
-          options.runtime('attr') +
-            '("' +
-            key +
-            '", ' +
-            val +
-            ', ' +
-            stringify(mustEscape) +
-            ', ' +
-            stringify(options.terse) +
-            ')'
-        );
-      } else {
-        if (mustEscape) {
-          val = options.runtime('escape') + '(' + val + ')';
-        }
-        buf.push(stringify(key) + ': ' + val);
+      if (mustEscape) {
+        val = `${options.runtime('escape')}(${val})`;
       }
+      buf.push(`${stringify(key)}: ${val}`);
     }
   }
 
-  attrs.forEach(function (attr) {
-    var key = attr.name;
-    var val = attr.val;
-    var mustEscape = attr.mustEscape;
+  attrs.forEach((attr) => {
+    const key = attr.name;
+    let {val} = attr;
+    const {mustEscape} = attr;
 
     if (key === 'class') {
       classes.push(val);
@@ -106,13 +94,13 @@ function compileAttrs(attrs, options) {
         if (isConstant(val)) {
           val = stringify(runtime.style(toConstant(val)));
         } else {
-          val = options.runtime('style') + '(' + val + ')';
+          val = `${options.runtime('style')}(${val})`;
         }
       }
       addAttribute(key, val, mustEscape, buf);
     }
   });
-  var classesBuf = [];
+  const classesBuf = [];
   if (classes.length) {
     if (classes.every(isConstant)) {
       addAttribute(
@@ -122,7 +110,7 @@ function compileAttrs(attrs, options) {
         classesBuf
       );
     } else {
-      classes = classes.map(function (cls, i) {
+      classes = classes.map((cls, i) => {
         if (isConstant(cls)) {
           cls = stringify(
             classEscaping[i] ? runtime.escape(toConstant(cls)) : toConstant(cls)
@@ -133,12 +121,9 @@ function compileAttrs(attrs, options) {
       });
       addAttribute(
         'class',
-        options.runtime('classes') +
-          '([' +
-          classes.join(',') +
-          '], ' +
-          stringify(classEscaping) +
-          ')',
+        `${options.runtime('classes')}([${classes.join(',')}], ${stringify(
+          classEscaping
+        )})`,
         false,
         classesBuf
       );
@@ -146,5 +131,5 @@ function compileAttrs(attrs, options) {
   }
   buf = classesBuf.concat(buf);
   if (options.format === 'html') return buf.length ? buf.join('+') : '""';
-  else return '{' + buf.join(',') + '}';
+  return `{${buf.join(',')}}`;
 }

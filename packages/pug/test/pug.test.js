@@ -1,23 +1,21 @@
-'use strict';
+const assert = require('assert');
+const fs = require('fs');
+const path = require('path');
+const pug = require('..');
 
-var assert = require('assert');
-var fs = require('fs');
-var path = require('path');
-var pug = require('../');
-
-var perfTest = fs.readFileSync(__dirname + '/fixtures/perf.pug', 'utf8');
+const perfTest = fs.readFileSync(`${__dirname}/fixtures/perf.pug`, 'utf8');
 
 try {
-  fs.mkdirSync(__dirname + '/temp');
+  fs.mkdirSync(`${__dirname}/temp`);
 } catch (ex) {
   if (ex.code !== 'EEXIST') {
     throw ex;
   }
 }
 
-describe('pug', function () {
-  describe('unit tests with .render()', function () {
-    it('should support doctypes', function () {
+describe('pug', () => {
+  describe('unit tests with .render()', () => {
+    it('should support doctypes', () => {
       assert.equal(
         '<?xml version="1.0" encoding="utf-8" ?>',
         pug.render('doctype xml')
@@ -41,14 +39,14 @@ describe('pug', function () {
       );
     });
 
-    it('should support Buffers', function () {
+    it('should support Buffers', () => {
       assert.equal('<p>foo</p>', pug.render(Buffer.from('p foo')));
     });
 
-    it('should support line endings', function () {
-      var src = ['p', 'div', 'img'];
+    it('should support line endings', () => {
+      const src = ['p', 'div', 'img'];
 
-      var html = ['<p></p>', '<div></div>', '<img/>'].join('');
+      let html = ['<p></p>', '<div></div>', '<img/>'].join('');
 
       assert.equal(html, pug.render(src.join('\n')));
       assert.equal(html, pug.render(src.join('\r')));
@@ -61,7 +59,7 @@ describe('pug', function () {
       assert.equal(html, pug.render(src.join('\r\n'), {doctype: 'html'}));
     });
 
-    it('should support single quotes', function () {
+    it('should support single quotes', () => {
       assert.equal("<p>'foo'</p>", pug.render("p 'foo'"));
       assert.equal("<p>'foo'</p>", pug.render("p\n  | 'foo'"));
       assert.equal(
@@ -70,7 +68,7 @@ describe('pug', function () {
       );
     });
 
-    it('should support block-expansion', function () {
+    it('should support block-expansion', () => {
       assert.equal(
         '<li><a>foo</a></li><li><a>bar</a></li><li><a>baz</a></li>',
         pug.render('li: a foo\nli: a bar\nli: a baz')
@@ -85,10 +83,10 @@ describe('pug', function () {
       );
     });
 
-    it('should support tags', function () {
-      var str = ['p', 'div', 'img', 'br/'].join('\n');
+    it('should support tags', () => {
+      const str = ['p', 'div', 'img', 'br/'].join('\n');
 
-      var html = ['<p></p>', '<div></div>', '<img/>', '<br/>'].join('');
+      const html = ['<p></p>', '<div></div>', '<img/>', '<br/>'].join('');
 
       assert.equal(html, pug.render(str), 'Test basic tags');
       assert.equal(
@@ -156,7 +154,7 @@ describe('pug', function () {
       );
     });
 
-    it('should support nested tags', function () {
+    it('should support nested tags', () => {
       var str = [
         'ul',
         '  li a',
@@ -199,8 +197,8 @@ describe('pug', function () {
       assert.equal(html, pug.render(str));
     });
 
-    it('should support variable length newlines', function () {
-      var str = [
+    it('should support variable length newlines', () => {
+      const str = [
         'ul',
         '  li a',
         '  ',
@@ -215,7 +213,7 @@ describe('pug', function () {
         '  li e',
       ].join('\n');
 
-      var html = [
+      const html = [
         '<ul>',
         '<li>a</li>',
         '<li>b</li>',
@@ -227,8 +225,8 @@ describe('pug', function () {
       assert.equal(html, pug.render(str));
     });
 
-    it('should support tab conversion', function () {
-      var str = [
+    it('should support tab conversion', () => {
+      const str = [
         'ul',
         '\tli a',
         '\t',
@@ -243,7 +241,7 @@ describe('pug', function () {
         '\tli e',
       ].join('\n');
 
-      var html = [
+      const html = [
         '<ul>',
         '<li>a</li>',
         '<li>b</li>',
@@ -255,7 +253,7 @@ describe('pug', function () {
       assert.equal(html, pug.render(str));
     });
 
-    it('should support newlines', function () {
+    it('should support newlines', () => {
       var str = [
         'ul',
         '  li a',
@@ -317,7 +315,7 @@ describe('pug', function () {
       );
     });
 
-    it('should support text', function () {
+    it('should support text', () => {
       assert.equal('foo\nbar\nbaz', pug.render('| foo\n| bar\n| baz'));
       assert.equal('foo \nbar \nbaz', pug.render('| foo \n| bar \n| baz'));
       assert.equal('(hey)', pug.render('| (hey)'));
@@ -327,7 +325,7 @@ describe('pug', function () {
       assert.equal('  foo  \n bar    ', pug.render('|   foo  \n|  bar    '));
     });
 
-    it('should support pipe-less text', function () {
+    it('should support pipe-less text', () => {
       assert.equal(
         '<pre><code><foo></foo><bar></bar></code></pre>',
         pug.render('pre\n  code\n    foo\n\n    bar')
@@ -351,7 +349,7 @@ describe('pug', function () {
       );
     });
 
-    it('should support tag text', function () {
+    it('should support tag text', () => {
       assert.equal('<p>some random text</p>', pug.render('p some random text'));
       assert.equal(
         '<p>click<a>Google</a>.</p>',
@@ -368,7 +366,7 @@ describe('pug', function () {
       );
     });
 
-    it('should support tag text block', function () {
+    it('should support tag text block', () => {
       assert.equal(
         '<p>foo \nbar \nbaz</p>',
         pug.render('p\n  | foo \n  | bar \n  | baz')
@@ -383,7 +381,7 @@ describe('pug', function () {
       );
     });
 
-    it('should support tag text interpolation', function () {
+    it('should support tag text interpolation', () => {
       assert.equal(
         'yo, pug is cool',
         pug.render('| yo, #{name} is cool\n', {name: 'pug'})
@@ -410,14 +408,14 @@ describe('pug', function () {
       );
     });
 
-    it('should support flexible indentation', function () {
+    it('should support flexible indentation', () => {
       assert.equal(
         '<html><body><h1>Wahoo</h1><p>test</p></body></html>',
         pug.render('html\n  body\n   h1 Wahoo\n   p test')
       );
     });
 
-    it('should support interpolation values', function () {
+    it('should support interpolation values', () => {
       assert.equal('<p>Users: 15</p>', pug.render('p Users: #{15}'));
       assert.equal('<p>Users: </p>', pug.render('p Users: #{null}'));
       assert.equal('<p>Users: </p>', pug.render('p Users: #{undefined}'));
@@ -429,7 +427,7 @@ describe('pug', function () {
       assert.equal('<p>Users: false</p>', pug.render('p Users: #{false}'));
     });
 
-    it('should support test html 5 mode', function () {
+    it('should support test html 5 mode', () => {
       assert.equal(
         '<!DOCTYPE html><input type="checkbox" checked>',
         pug.render('doctype html\ninput(type="checkbox", checked)')
@@ -444,7 +442,7 @@ describe('pug', function () {
       );
     });
 
-    it('should support multi-line attrs', function () {
+    it('should support multi-line attrs', () => {
       assert.equal(
         '<a foo="bar" bar="baz" checked="checked">foo</a>',
         pug.render('a(foo="bar"\n  bar="baz"\n  checked) foo')
@@ -463,7 +461,7 @@ describe('pug', function () {
       );
     });
 
-    it('should support attrs', function () {
+    it('should support attrs', () => {
       assert.equal(
         '<img src="&lt;script&gt;"/>',
         pug.render('img(src="<script>")'),
@@ -674,21 +672,21 @@ describe('pug', function () {
       );
     });
 
-    it('should support class attr array', function () {
+    it('should support class attr array', () => {
       assert.equal(
         '<body class="foo bar baz"></body>',
         pug.render('body(class=["foo", "bar", "baz"])')
       );
     });
 
-    it('should support attr parens', function () {
+    it('should support attr parens', () => {
       assert.equal(
         '<p foo="bar">baz</p>',
         pug.render('p(foo=((("bar"))))= ((("baz")))')
       );
     });
 
-    it('should support code attrs', function () {
+    it('should support code attrs', () => {
       assert.equal('<p></p>', pug.render('p(id= name)', {name: undefined}));
       assert.equal('<p></p>', pug.render('p(id= name)', {name: null}));
       assert.equal('<p></p>', pug.render('p(id= name)', {name: false}));
@@ -716,7 +714,7 @@ describe('pug', function () {
       );
     });
 
-    it('should support code attrs class', function () {
+    it('should support code attrs class', () => {
       assert.equal(
         '<p class="tj"></p>',
         pug.render('p(class= name)', {name: 'tj'})
@@ -748,15 +746,15 @@ describe('pug', function () {
       );
     });
 
-    it('should support code buffering', function () {
+    it('should support code buffering', () => {
       assert.equal('<p></p>', pug.render('p= null'));
       assert.equal('<p></p>', pug.render('p= undefined'));
       assert.equal('<p>0</p>', pug.render('p= 0'));
       assert.equal('<p>false</p>', pug.render('p= false'));
     });
 
-    it('should support script text', function () {
-      var str = [
+    it('should support script text', () => {
+      const str = [
         'script.',
         '  p foo',
         '',
@@ -767,7 +765,7 @@ describe('pug', function () {
         '  p foo',
       ].join('\n');
 
-      var html = [
+      const html = [
         '<script>p foo\n</script>',
         '<script type="text/template"><p>foo</p></script>',
         '<script type="text/template">p foo</script>',
@@ -776,7 +774,7 @@ describe('pug', function () {
       assert.equal(html, pug.render(str));
     });
 
-    it('should support comments', function () {
+    it('should support comments', () => {
       // Regular
       var str = ['//foo', 'p bar'].join('\n');
 
@@ -794,12 +792,12 @@ describe('pug', function () {
 
       // Quotes
 
-      var str = "<!-- script(src: '/js/validate.js') -->",
-        js = "// script(src: '/js/validate.js') ";
+      var str = "<!-- script(src: '/js/validate.js') -->";
+      const js = "// script(src: '/js/validate.js') ";
       assert.equal(str, pug.render(js));
     });
 
-    it('should support unbuffered comments', function () {
+    it('should support unbuffered comments', () => {
       var str = ['//- foo', 'p bar'].join('\n');
 
       var html = ['<p>bar</p>'].join('');
@@ -813,14 +811,14 @@ describe('pug', function () {
       assert.equal(html, pug.render(str));
     });
 
-    it('should support literal html', function () {
+    it('should support literal html', () => {
       assert.equal(
         '<!--[if IE lt 9]>weeee<![endif]-->',
         pug.render('<!--[if IE lt 9]>weeee<![endif]-->')
       );
     });
 
-    it('should support code', function () {
+    it('should support code', () => {
       assert.equal('test', pug.render('!= "test"'));
       assert.equal('test', pug.render('= "test"'));
       assert.equal('test', pug.render('- var foo = "test"\n=foo'));
@@ -912,7 +910,7 @@ describe('pug', function () {
       assert.equal(html, pug.render(str));
     });
 
-    it('should support each', function () {
+    it('should support each', () => {
       // Array
       var str = [
         '- var items = ["one", "two", "three"];',
@@ -1008,8 +1006,8 @@ describe('pug', function () {
       assert.equal(html, pug.render(str));
     });
 
-    it('should support if', function () {
-      var str = [
+    it('should support if', () => {
+      const str = [
         '- var users = ["tobi", "loki", "jane"]',
         'if users.length',
         '  p users: #{users.length}',
@@ -1023,7 +1021,7 @@ describe('pug', function () {
       );
     });
 
-    it('should support unless', function () {
+    it('should support unless', () => {
       var str = [
         '- var users = ["tobi", "loki", "jane"]',
         'unless users.length',
@@ -1041,8 +1039,8 @@ describe('pug', function () {
       assert.equal('<p>no users</p>', pug.render(str));
     });
 
-    it('should support else', function () {
-      var str = [
+    it('should support else', () => {
+      const str = [
         '- var users = []',
         'if users.length',
         '  p users: #{users.length}',
@@ -1053,8 +1051,8 @@ describe('pug', function () {
       assert.equal('<p>users: none</p>', pug.render(str));
     });
 
-    it('should else if', function () {
-      var str = [
+    it('should else if', () => {
+      const str = [
         '- var users = ["tobi", "jane", "loki"]',
         'for user in users',
         '  if user == "tobi"',
@@ -1071,8 +1069,8 @@ describe('pug', function () {
       );
     });
 
-    it('should include block', function () {
-      var str = [
+    it('should include block', () => {
+      const str = [
         'html',
         '  head',
         '    include fixtures/scripts.pug',
@@ -1081,17 +1079,17 @@ describe('pug', function () {
 
       assert.equal(
         '<html><head><script src="/jquery.js"></script><script src="/caustic.js"></script><scripts src="/app.js"></scripts></head></html>',
-        pug.render(str, {filename: __dirname + '/pug.test.js'})
+        pug.render(str, {filename: `${__dirname}/pug.test.js`})
       );
     });
 
-    it('should not fail on js newlines', function () {
+    it('should not fail on js newlines', () => {
       assert.equal('<p>foo\u2028bar</p>', pug.render('p foo\u2028bar'));
       assert.equal('<p>foo\u2029bar</p>', pug.render('p foo\u2029bar'));
     });
 
-    it('should display error line number correctly up to token level', function () {
-      var str = [
+    it('should display error line number correctly up to token level', () => {
+      const str = [
         'p.',
         '  Lorem ipsum dolor sit amet, consectetur',
         '  adipisicing elit, sed do eiusmod tempor',
@@ -1106,7 +1104,7 @@ describe('pug', function () {
         '  fugiat nulla pariatur.',
         'a(href="#" Next',
       ].join('\n');
-      var errorLocation = function (str) {
+      const errorLocation = function (str) {
         try {
           pug.render(str);
         } catch (err) {
@@ -1117,123 +1115,119 @@ describe('pug', function () {
     });
   });
 
-  describe('.compileFile()', function () {
-    it('does not produce warnings for issue-1593', function () {
-      pug.compileFile(__dirname + '/fixtures/issue-1593/index.pug');
+  describe('.compileFile()', () => {
+    it('does not produce warnings for issue-1593', () => {
+      pug.compileFile(`${__dirname}/fixtures/issue-1593/index.pug`);
     });
-    it('should support caching (pass 1)', function () {
-      fs.writeFileSync(__dirname + '/temp/input-compileFile.pug', '.foo bar');
-      var fn = pug.compileFile(__dirname + '/temp/input-compileFile.pug', {
+    it('should support caching (pass 1)', () => {
+      fs.writeFileSync(`${__dirname}/temp/input-compileFile.pug`, '.foo bar');
+      const fn = pug.compileFile(`${__dirname}/temp/input-compileFile.pug`, {
         cache: true,
       });
-      var expected = '<div class="foo">bar</div>';
+      const expected = '<div class="foo">bar</div>';
       assert(fn() === expected);
     });
-    it('should support caching (pass 2)', function () {
+    it('should support caching (pass 2)', () => {
       // Poison the input file
       fs.writeFileSync(
-        __dirname + '/temp/input-compileFile.pug',
+        `${__dirname}/temp/input-compileFile.pug`,
         '.big fat hen'
       );
-      var fn = pug.compileFile(__dirname + '/temp/input-compileFile.pug', {
+      const fn = pug.compileFile(`${__dirname}/temp/input-compileFile.pug`, {
         cache: true,
       });
-      var expected = '<div class="foo">bar</div>';
+      const expected = '<div class="foo">bar</div>';
       assert(fn() === expected);
     });
   });
 
-  describe('.render()', function () {
-    it('should support .pug.render(str, fn)', function () {
-      pug.render('p foo bar', function (err, str) {
+  describe('.render()', () => {
+    it('should support .pug.render(str, fn)', () => {
+      pug.render('p foo bar', (err, str) => {
         assert.ok(!err);
         assert.equal('<p>foo bar</p>', str);
       });
     });
 
-    it('should support .pug.render(str, options, fn)', function () {
-      pug.render('p #{foo}', {foo: 'bar'}, function (err, str) {
+    it('should support .pug.render(str, options, fn)', () => {
+      pug.render('p #{foo}', {foo: 'bar'}, (err, str) => {
         assert.ok(!err);
         assert.equal('<p>bar</p>', str);
       });
     });
 
-    it('should support .pug.render(str, options, fn) cache', function () {
-      pug.render('p bar', {cache: true}, function (err, str) {
+    it('should support .pug.render(str, options, fn) cache', () => {
+      pug.render('p bar', {cache: true}, (err, str) => {
         assert.ok(
           /the "filename" option is required for caching/.test(err.message)
         );
       });
 
-      pug.render(
-        'p foo bar',
-        {cache: true, filename: 'test'},
-        function (err, str) {
-          assert.ok(!err);
-          assert.equal('<p>foo bar</p>', str);
-        }
-      );
+      pug.render('p foo bar', {cache: true, filename: 'test'}, (err, str) => {
+        assert.ok(!err);
+        assert.equal('<p>foo bar</p>', str);
+      });
     });
   });
 
-  describe('.compile()', function () {
-    it('should support .compile()', function () {
-      var fn = pug.compile('p foo');
+  describe('.compile()', () => {
+    it('should support .compile()', () => {
+      const fn = pug.compile('p foo');
       assert.equal('<p>foo</p>', fn());
     });
 
-    it('should support .compile() locals', function () {
-      var fn = pug.compile('p= foo');
+    it('should support .compile() locals', () => {
+      const fn = pug.compile('p= foo');
       assert.equal('<p>bar</p>', fn({foo: 'bar'}));
     });
 
-    it("should support .compile() locals in 'self' hash", function () {
-      var fn = pug.compile('p= self.foo', {self: true});
+    it("should support .compile() locals in 'self' hash", () => {
+      const fn = pug.compile('p= self.foo', {self: true});
       assert.equal('<p>bar</p>', fn({foo: 'bar'}));
     });
 
-    it('should support .compile() no debug', function () {
-      var fn = pug.compile('p foo\np #{bar}', {compileDebug: false});
+    it('should support .compile() no debug', () => {
+      const fn = pug.compile('p foo\np #{bar}', {compileDebug: false});
       assert.equal('<p>foo</p><p>baz</p>', fn({bar: 'baz'}));
     });
 
-    it('should support .compile() no debug and global helpers', function () {
-      var fn = pug.compile('p foo\np #{bar}', {
+    it('should support .compile() no debug and global helpers', () => {
+      const fn = pug.compile('p foo\np #{bar}', {
         compileDebug: false,
         helpers: 'global',
       });
       assert.equal('<p>foo</p><p>baz</p>', fn({bar: 'baz'}));
     });
 
-    it('should be reasonably fast', function () {
+    it('should be reasonably fast', () => {
       pug.compile(perfTest, {});
     });
-    it('allows trailing space (see #1586)', function () {
-      var res = pug.render('ul \n  li An Item');
+    it('allows trailing space (see #1586)', () => {
+      const res = pug.render('ul \n  li An Item');
       assert.equal('<ul> <li>An Item</li></ul>', res);
     });
   });
 
-  describe('.compileClient()', function () {
-    it('should support pug.compileClient(str)', function () {
-      var src = fs.readFileSync(__dirname + '/cases/basic.pug');
-      var expected = fs
-        .readFileSync(__dirname + '/cases/basic.html', 'utf8')
+  describe('.compileClient()', () => {
+    it('should support pug.compileClient(str)', () => {
+      const src = fs.readFileSync(`${__dirname}/cases/basic.pug`);
+      const expected = fs
+        .readFileSync(`${__dirname}/cases/basic.html`, 'utf8')
         .replace(/\s/g, '');
-      var fn = pug.compileClient(src);
-      fn = Function('pug', fn.toString() + '\nreturn template;')(pug.runtime);
-      var actual = fn({name: 'foo'}).replace(/\s/g, '');
+      let fn = pug.compileClient(src);
+      fn = Function('pug', `${fn.toString()}\nreturn template;`)(pug.runtime);
+      const actual = fn({name: 'foo'}).replace(/\s/g, '');
       expect(actual).toBe(expected);
     });
-    it('should support pug.compileClient(str, options)', function () {
-      var src = '.bar= self.foo';
-      var fn = pug.compileClient(src, {self: true});
-      fn = Function('pug', fn.toString() + '\nreturn template;')(pug.runtime);
-      var actual = fn({foo: 'baz'});
+    it('should support pug.compileClient(str, options)', () => {
+      const src = '.bar= self.foo';
+      let fn = pug.compileClient(src, {self: true});
+      fn = Function('pug', `${fn.toString()}\nreturn template;`)(pug.runtime);
+      const actual = fn({foo: 'baz'});
       expect(actual).toBe('<div class="bar">baz</div>');
     });
-    it('should support module syntax in pug.compileClient(str, options) when inlineRuntimeFunctions it true', function () {
-      var src = '.bar= self.foo';
+    it('should support module syntax in pug.compileClient(str, options) when inlineRuntimeFunctions it true', () => {
+      const src = '.bar= self.foo';
       var fn = pug.compileClient(src, {
         self: true,
         module: true,
@@ -1241,14 +1235,14 @@ describe('pug', function () {
       });
       expect(fn).toMatchSnapshot();
       fs.writeFileSync(
-        __dirname + '/temp/input-compileModuleFileClient.js',
+        `${__dirname}/temp/input-compileModuleFileClient.js`,
         fn
       );
-      var fn = require(__dirname + '/temp/input-compileModuleFileClient.js');
+      var fn = require(`${__dirname}/temp/input-compileModuleFileClient.js`);
       expect(fn({foo: 'baz'})).toBe('<div class="bar">baz</div>');
     });
-    it('should support module syntax in pug.compileClient(str, options) when inlineRuntimeFunctions it false', function () {
-      var src = '.bar= self.foo';
+    it('should support module syntax in pug.compileClient(str, options) when inlineRuntimeFunctions it false', () => {
+      const src = '.bar= self.foo';
       var fn = pug.compileClient(src, {
         self: true,
         module: true,
@@ -1256,79 +1250,79 @@ describe('pug', function () {
       });
       expect(fn).toMatchSnapshot();
       fs.writeFileSync(
-        __dirname + '/temp/input-compileModuleFileClient.js',
+        `${__dirname}/temp/input-compileModuleFileClient.js`,
         fn
       );
-      var fn = require(__dirname + '/temp/input-compileModuleFileClient.js');
+      var fn = require(`${__dirname}/temp/input-compileModuleFileClient.js`);
       expect(fn({foo: 'baz'})).toBe('<div class="bar">baz</div>');
     });
   });
 
-  describe('.renderFile()', function () {
-    it('will synchronously return a string', function () {
-      var expected = fs
-        .readFileSync(__dirname + '/cases/basic.html', 'utf8')
+  describe('.renderFile()', () => {
+    it('will synchronously return a string', () => {
+      const expected = fs
+        .readFileSync(`${__dirname}/cases/basic.html`, 'utf8')
         .replace(/\s/g, '');
-      var actual = pug
-        .renderFile(__dirname + '/cases/basic.pug', {name: 'foo'})
+      const actual = pug
+        .renderFile(`${__dirname}/cases/basic.pug`, {name: 'foo'})
         .replace(/\s/g, '');
       assert(actual === expected);
     });
-    it('when given a callback, it calls that rather than returning', function (done) {
-      var expected = fs
-        .readFileSync(__dirname + '/cases/basic.html', 'utf8')
+    it('when given a callback, it calls that rather than returning', (done) => {
+      const expected = fs
+        .readFileSync(`${__dirname}/cases/basic.html`, 'utf8')
         .replace(/\s/g, '');
       pug.renderFile(
-        __dirname + '/cases/basic.pug',
+        `${__dirname}/cases/basic.pug`,
         {name: 'foo'},
-        function (err, actual) {
+        (err, actual) => {
           if (err) return done(err);
           assert(actual.replace(/\s/g, '') === expected);
           done();
         }
       );
     });
-    it('when given a callback, it calls that rather than returning even if there are no options', function (done) {
-      var expected = fs
-        .readFileSync(__dirname + '/cases/basic.html', 'utf8')
+    it('when given a callback, it calls that rather than returning even if there are no options', (done) => {
+      const expected = fs
+        .readFileSync(`${__dirname}/cases/basic.html`, 'utf8')
         .replace(/\s/g, '');
-      pug.renderFile(__dirname + '/cases/basic.pug', function (err, actual) {
+      pug.renderFile(`${__dirname}/cases/basic.pug`, (err, actual) => {
         if (err) return done(err);
         assert(actual.replace(/\s/g, '') === expected);
         done();
       });
     });
-    it('when given a callback, it calls that with any errors', function (done) {
+    it('when given a callback, it calls that with any errors', (done) => {
       pug.renderFile(
-        __dirname + '/fixtures/runtime.error.pug',
-        function (err, actual) {
+        `${__dirname}/fixtures/runtime.error.pug`,
+        (err, actual) => {
           assert.ok(err);
           done();
         }
       );
     });
-    it('should support caching (pass 1)', function (done) {
-      fs.writeFileSync(__dirname + '/temp/input-renderFile.pug', '.foo bar');
+    it('should support caching (pass 1)', (done) => {
+      fs.writeFileSync(`${__dirname}/temp/input-renderFile.pug`, '.foo bar');
       pug.renderFile(
-        __dirname + '/temp/input-renderFile.pug',
+        `${__dirname}/temp/input-renderFile.pug`,
         {cache: true},
-        function (err, actual) {
+        (err, actual) => {
           if (err) return done(err);
           assert.equal('<div class="foo">bar</div>', actual);
           done();
         }
       );
     });
-    it('should support caching (pass 2)', function (done) {
+    it('should support caching (pass 2)', (done) => {
       // Poison the input file
       fs.writeFileSync(
-        __dirname + '/temp/input-renderFile.pug',
+        `${__dirname}/temp/input-renderFile.pug`,
         '.big fat hen'
       );
       pug.renderFile(
-        __dirname + '/temp/input-renderFile.pug',
+        `${__dirname}/temp/input-renderFile.pug`,
         {cache: true},
-        function (err, actual) {
+        (err, actual) => {
           if (err) return done(err);
           assert.equal('<div class="foo">bar</div>', actual);
           done();
@@ -1337,59 +1331,59 @@ describe('pug', function () {
     });
   });
 
-  describe('.compileFileClient(path, options)', function () {
-    it('returns a string form of a function called `template`', function () {
-      var src = pug.compileFileClient(__dirname + '/cases/basic.pug');
-      var expected = fs
-        .readFileSync(__dirname + '/cases/basic.html', 'utf8')
+  describe('.compileFileClient(path, options)', () => {
+    it('returns a string form of a function called `template`', () => {
+      const src = pug.compileFileClient(`${__dirname}/cases/basic.pug`);
+      const expected = fs
+        .readFileSync(`${__dirname}/cases/basic.html`, 'utf8')
         .replace(/\s/g, '');
-      var fn = Function('pug', src + '\nreturn template;')(pug.runtime);
-      var actual = fn({name: 'foo'}).replace(/\s/g, '');
+      const fn = Function('pug', `${src}\nreturn template;`)(pug.runtime);
+      const actual = fn({name: 'foo'}).replace(/\s/g, '');
       assert(actual === expected);
     });
-    it('accepts the `name` option to rename the resulting function', function () {
-      var src = pug.compileFileClient(__dirname + '/cases/basic.pug', {
+    it('accepts the `name` option to rename the resulting function', () => {
+      const src = pug.compileFileClient(`${__dirname}/cases/basic.pug`, {
         name: 'myTemplateName',
       });
-      var expected = fs
-        .readFileSync(__dirname + '/cases/basic.html', 'utf8')
+      const expected = fs
+        .readFileSync(`${__dirname}/cases/basic.html`, 'utf8')
         .replace(/\s/g, '');
-      var fn = Function('pug', src + '\nreturn myTemplateName;')(pug.runtime);
-      var actual = fn({name: 'foo'}).replace(/\s/g, '');
+      const fn = Function('pug', `${src}\nreturn myTemplateName;`)(pug.runtime);
+      const actual = fn({name: 'foo'}).replace(/\s/g, '');
       assert(actual === expected);
     });
-    it('should support caching (pass 1)', function () {
+    it('should support caching (pass 1)', () => {
       fs.writeFileSync(
-        __dirname + '/temp/input-compileFileClient.pug',
+        `${__dirname}/temp/input-compileFileClient.pug`,
         '.foo bar'
       );
-      var src = pug.compileFileClient(
-        __dirname + '/temp/input-compileFileClient.pug',
+      const src = pug.compileFileClient(
+        `${__dirname}/temp/input-compileFileClient.pug`,
         {name: 'myTemplateName', cache: true}
       );
-      var expected = '<div class="foo">bar</div>';
-      var fn = Function('pug', src + '\nreturn myTemplateName;')(pug.runtime);
+      const expected = '<div class="foo">bar</div>';
+      const fn = Function('pug', `${src}\nreturn myTemplateName;`)(pug.runtime);
       assert(fn() === expected);
     });
-    it('should support caching (pass 2)', function () {
+    it('should support caching (pass 2)', () => {
       // Poison the input file
       fs.writeFileSync(
-        __dirname + '/temp/input-compileFileClient.pug',
+        `${__dirname}/temp/input-compileFileClient.pug`,
         '.big fat hen'
       );
-      var src = pug.compileFileClient(
-        __dirname + '/temp/input-compileFileClient.pug',
+      const src = pug.compileFileClient(
+        `${__dirname}/temp/input-compileFileClient.pug`,
         {name: 'myTemplateName', cache: true}
       );
-      var expected = '<div class="foo">bar</div>';
-      var fn = Function('pug', src + '\nreturn myTemplateName;')(pug.runtime);
+      const expected = '<div class="foo">bar</div>';
+      const fn = Function('pug', `${src}\nreturn myTemplateName;`)(pug.runtime);
       assert(fn() === expected);
     });
   });
 
-  describe('.runtime', function () {
-    describe('.merge', function () {
-      it('merges two attribute objects, giving precedensce to the second object', function () {
+  describe('.runtime', () => {
+    describe('.merge', () => {
+      it('merges two attribute objects, giving precedensce to the second object', () => {
         assert.deepEqual(
           pug.runtime.merge({}, {class: ['foo', 'bar'], foo: 'bar'}),
           {class: ['foo', 'bar'], foo: 'bar'}
@@ -1407,8 +1401,8 @@ describe('pug', function () {
         );
       });
     });
-    describe('.attrs', function () {
-      it('Renders the given attributes object', function () {
+    describe('.attrs', () => {
+      it('Renders the given attributes object', () => {
         assert.equal(pug.runtime.attrs({}), '');
         assert.equal(pug.runtime.attrs({class: []}), '');
         assert.equal(pug.runtime.attrs({class: ['foo']}), ' class="foo"');
@@ -1420,20 +1414,18 @@ describe('pug', function () {
     });
   });
 
-  describe('filter indentation', function () {
-    it('is maintained', function () {
-      var filters = {
-        indents: function (str) {
+  describe('filter indentation', () => {
+    it('is maintained', () => {
+      const filters = {
+        indents(str) {
           return str
             .split(/\n/)
-            .map(function (line) {
-              return line.match(/^ */)[0].length;
-            })
+            .map((line) => line.match(/^ */)[0].length)
             .join(',');
         },
       };
 
-      var indents = [
+      const indents = [
         ':indents',
         '  x',
         '   x',
@@ -1453,59 +1445,59 @@ describe('pug', function () {
       ].join('\n');
 
       assert.equal(
-        pug.render(indents, {filters: filters}),
+        pug.render(indents, {filters}),
         '0,1,2,3,0,4,4,3,3,4,2,0,2,0,1'
       );
     });
   });
 
-  describe('.compile().dependencies', function () {
-    it('should list the filename of the template referenced by extends', function () {
-      var filename = __dirname + '/dependencies/extends1.pug';
-      var str = fs.readFileSync(filename, 'utf8');
-      var info = pug.compile(str, {filename: filename});
+  describe('.compile().dependencies', () => {
+    it('should list the filename of the template referenced by extends', () => {
+      const filename = `${__dirname}/dependencies/extends1.pug`;
+      const str = fs.readFileSync(filename, 'utf8');
+      const info = pug.compile(str, {filename});
       assert.deepEqual(
-        [path.resolve(__dirname + '/dependencies/dependency1.pug')],
+        [path.resolve(`${__dirname}/dependencies/dependency1.pug`)],
         info.dependencies
       );
     });
-    it('should list the filename of the template referenced by an include', function () {
-      var filename = __dirname + '/dependencies/include1.pug';
-      var str = fs.readFileSync(filename, 'utf8');
-      var info = pug.compile(str, {filename: filename});
+    it('should list the filename of the template referenced by an include', () => {
+      const filename = `${__dirname}/dependencies/include1.pug`;
+      const str = fs.readFileSync(filename, 'utf8');
+      const info = pug.compile(str, {filename});
       assert.deepEqual(
-        [path.resolve(__dirname + '/dependencies/dependency1.pug')],
+        [path.resolve(`${__dirname}/dependencies/dependency1.pug`)],
         info.dependencies
       );
     });
-    it('should list the dependencies of extends dependencies', function () {
-      var filename = __dirname + '/dependencies/extends2.pug';
-      var str = fs.readFileSync(filename, 'utf8');
-      var info = pug.compile(str, {filename: filename});
+    it('should list the dependencies of extends dependencies', () => {
+      const filename = `${__dirname}/dependencies/extends2.pug`;
+      const str = fs.readFileSync(filename, 'utf8');
+      const info = pug.compile(str, {filename});
       assert.deepEqual(
         [
-          path.resolve(__dirname + '/dependencies/dependency2.pug'),
-          path.resolve(__dirname + '/dependencies/dependency3.pug'),
+          path.resolve(`${__dirname}/dependencies/dependency2.pug`),
+          path.resolve(`${__dirname}/dependencies/dependency3.pug`),
         ],
         info.dependencies
       );
     });
-    it('should list the dependencies of include dependencies', function () {
-      var filename = __dirname + '/dependencies/include2.pug';
-      var str = fs.readFileSync(filename, 'utf8');
-      var info = pug.compile(str, {filename: filename});
+    it('should list the dependencies of include dependencies', () => {
+      const filename = `${__dirname}/dependencies/include2.pug`;
+      const str = fs.readFileSync(filename, 'utf8');
+      const info = pug.compile(str, {filename});
       assert.deepEqual(
         [
-          path.resolve(__dirname + '/dependencies/dependency2.pug'),
-          path.resolve(__dirname + '/dependencies/dependency3.pug'),
+          path.resolve(`${__dirname}/dependencies/dependency2.pug`),
+          path.resolve(`${__dirname}/dependencies/dependency3.pug`),
         ],
         info.dependencies
       );
     });
   });
 
-  describe('.name', function () {
-    it('should have a name attribute', function () {
+  describe('.name', () => {
+    it('should have a name attribute', () => {
       assert.strictEqual(pug.name, 'Pug');
     });
   });

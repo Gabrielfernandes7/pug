@@ -1,14 +1,12 @@
-'use strict';
+const fs = require('fs');
+const assert = require('assert');
+const lex = require('..');
 
-var fs = require('fs');
-var assert = require('assert');
-var lex = require('../');
-
-var dir = __dirname + '/cases/';
-fs.readdirSync(dir).forEach(function (testCase) {
+const dir = `${__dirname}/cases/`;
+fs.readdirSync(dir).forEach((testCase) => {
   if (/\.pug$/.test(testCase)) {
     test(testCase, () => {
-      var result = lex(fs.readFileSync(dir + testCase, 'utf8'), {
+      const result = lex(fs.readFileSync(dir + testCase, 'utf8'), {
         filename: dir + testCase,
       });
       expect(result).toMatchSnapshot();
@@ -16,16 +14,16 @@ fs.readdirSync(dir).forEach(function (testCase) {
   }
 });
 
-var edir = __dirname + '/errors/';
-fs.readdirSync(edir).forEach(function (testCase) {
+const edir = `${__dirname}/errors/`;
+fs.readdirSync(edir).forEach((testCase) => {
   if (/\.pug$/.test(testCase)) {
     test(testCase, () => {
-      var actual;
+      let actual;
       try {
         lex(fs.readFileSync(edir + testCase, 'utf8'), {
           filename: edir + testCase,
         });
-        throw new Error('Expected ' + testCase + ' to throw an exception.');
+        throw new Error(`Expected ${testCase} to throw an exception.`);
       } catch (ex) {
         if (!ex || !ex.code || ex.code.indexOf('PUG:') !== 0) throw ex;
         actual = {

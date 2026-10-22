@@ -2,10 +2,10 @@ const crypto = require('crypto');
 
 // Buffer serializer to reduce snapshot gore for Node Buffer type
 module.exports = {
-  test: function (val) {
+  test(val) {
     return val && Buffer.isBuffer(val);
   },
-  print: function (val, serialize, indent) {
+  print(val, serialize, indent) {
     const output = {
       type: 'Buffer',
       size: val.length,

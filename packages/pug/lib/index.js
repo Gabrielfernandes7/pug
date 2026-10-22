@@ -1,5 +1,3 @@
-'use strict';
-
 /*!
  * Pug
  * Copyright(c) 2010 TJ Holowaychuk <tj@vision-media.ca>
@@ -10,17 +8,17 @@
  * Module dependencies.
  */
 
-var fs = require('fs');
-var path = require('path');
-var lex = require('pug-lexer');
-var stripComments = require('pug-strip-comments');
-var parse = require('pug-parser');
-var load = require('pug-load');
-var filters = require('pug-filters');
-var link = require('pug-linker');
-var generateCode = require('pug-code-gen');
-var runtime = require('pug-runtime');
-var runtimeWrap = require('pug-runtime/wrap');
+const fs = require('fs');
+const path = require('path');
+const lex = require('pug-lexer');
+const stripComments = require('pug-strip-comments');
+const parse = require('pug-parser');
+const load = require('pug-load');
+const filters = require('pug-filters');
+const link = require('pug-linker');
+const generateCode = require('pug-code-gen');
+const runtime = require('pug-runtime');
+const runtimeWrap = require('pug-runtime/wrap');
 
 /**
  * Name for detection
@@ -41,18 +39,17 @@ exports.runtime = runtime;
 exports.cache = {};
 
 function applyPlugins(value, options, plugins, name) {
-  return plugins.reduce(function (value, plugin) {
-    return plugin[name] ? plugin[name](value, options) : value;
-  }, value);
+  return plugins.reduce(
+    (value, plugin) => (plugin[name] ? plugin[name](value, options) : value),
+    value
+  );
 }
 
 function findReplacementFunc(plugins, name) {
-  var eligiblePlugins = plugins.filter(function (plugin) {
-    return plugin[name];
-  });
+  const eligiblePlugins = plugins.filter((plugin) => plugin[name]);
 
   if (eligiblePlugins.length > 1) {
-    throw new Error('Two or more plugins all implement ' + name + ' method.');
+    throw new Error(`Two or more plugins all implement ${name} method.`);
   } else if (eligiblePlugins.length) {
     return eligiblePlugins[0][name].bind(eligiblePlugins[0]);
   }
@@ -75,26 +72,22 @@ exports.filters = {};
  */
 
 function compileBody(str, options) {
-  var debug_sources = {};
+  const debug_sources = {};
   debug_sources[options.filename] = str;
-  var dependencies = [];
-  var plugins = options.plugins || [];
-  var ast = load.string(str, {
+  const dependencies = [];
+  const plugins = options.plugins || [];
+  let ast = load.string(str, {
     filename: options.filename,
     basedir: options.basedir,
-    lex: function (str, options) {
-      var lexOptions = {};
-      Object.keys(options).forEach(function (key) {
+    lex(str, options) {
+      const lexOptions = {};
+      Object.keys(options).forEach((key) => {
         lexOptions[key] = options[key];
       });
       lexOptions.plugins = plugins
-        .filter(function (plugin) {
-          return !!plugin.lex;
-        })
-        .map(function (plugin) {
-          return plugin.lex;
-        });
-      var contents = applyPlugins(
+        .filter((plugin) => !!plugin.lex)
+        .map((plugin) => plugin.lex);
+      const contents = applyPlugins(
         str,
         {filename: options.filename},
         plugins,
@@ -107,30 +100,26 @@ function compileBody(str, options) {
         'postLex'
       );
     },
-    parse: function (tokens, options) {
-      tokens = tokens.map(function (token) {
+    parse(tokens, options) {
+      tokens = tokens.map((token) => {
         if (token.type === 'path' && path.extname(token.val) === '') {
           return {
             type: 'path',
             loc: token.loc,
-            val: token.val + '.pug',
+            val: `${token.val}.pug`,
           };
         }
         return token;
       });
       tokens = stripComments(tokens, options);
       tokens = applyPlugins(tokens, options, plugins, 'preParse');
-      var parseOptions = {};
-      Object.keys(options).forEach(function (key) {
+      const parseOptions = {};
+      Object.keys(options).forEach((key) => {
         parseOptions[key] = options[key];
       });
       parseOptions.plugins = plugins
-        .filter(function (plugin) {
-          return !!plugin.parse;
-        })
-        .map(function (plugin) {
-          return plugin.parse;
-        });
+        .filter((plugin) => !!plugin.parse)
+        .map((plugin) => plugin.parse);
 
       return applyPlugins(
         applyPlugins(
@@ -144,20 +133,20 @@ function compileBody(str, options) {
         'preLoad'
       );
     },
-    resolve: function (filename, source, loadOptions) {
-      var replacementFunc = findReplacementFunc(plugins, 'resolve');
+    resolve(filename, source, loadOptions) {
+      const replacementFunc = findReplacementFunc(plugins, 'resolve');
       if (replacementFunc) {
         return replacementFunc(filename, source, options);
       }
 
       return load.resolve(filename, source, loadOptions);
     },
-    read: function (filename, loadOptions) {
+    read(filename, loadOptions) {
       dependencies.push(filename);
 
-      var contents;
+      let contents;
 
-      var replacementFunc = findReplacementFunc(plugins, 'read');
+      const replacementFunc = findReplacementFunc(plugins, 'read');
       if (replacementFunc) {
         contents = replacementFunc(filename, options);
       } else {
@@ -173,12 +162,12 @@ function compileBody(str, options) {
   ast = applyPlugins(ast, options, plugins, 'postLoad');
   ast = applyPlugins(ast, options, plugins, 'preFilters');
 
-  var filtersSet = {};
-  Object.keys(exports.filters).forEach(function (key) {
+  const filtersSet = {};
+  Object.keys(exports.filters).forEach((key) => {
     filtersSet[key] = exports.filters[key];
   });
   if (options.filters) {
-    Object.keys(options.filters).forEach(function (key) {
+    Object.keys(options.filters).forEach((key) => {
       filtersSet[key] = options.filters[key];
     });
   }
@@ -196,7 +185,7 @@ function compileBody(str, options) {
 
   // Compile
   ast = applyPlugins(ast, options, plugins, 'preCodeGen');
-  var js = (findReplacementFunc(plugins, 'generateCode') || generateCode)(ast, {
+  let js = (findReplacementFunc(plugins, 'generateCode') || generateCode)(ast, {
     pretty: options.pretty,
     compileDebug: options.compileDebug,
     doctype: options.doctype,
@@ -216,7 +205,7 @@ function compileBody(str, options) {
     );
   }
 
-  return {body: js, dependencies: dependencies};
+  return {body: js, dependencies};
 }
 
 /**
@@ -234,15 +223,14 @@ function compileBody(str, options) {
  * @api private
  */
 function handleTemplateCache(options, str) {
-  var key = options.filename;
+  const key = options.filename;
   if (options.cache && exports.cache[key]) {
     return exports.cache[key];
-  } else {
-    if (str === undefined) str = fs.readFileSync(options.filename, 'utf8');
-    var templ = exports.compile(str, options);
-    if (options.cache) exports.cache[key] = templ;
-    return templ;
   }
+  if (str === undefined) str = fs.readFileSync(options.filename, 'utf8');
+  const templ = exports.compile(str, options);
+  if (options.cache) exports.cache[key] = templ;
+  return templ;
 }
 
 /**
@@ -266,7 +254,7 @@ exports.compile = function (str, options) {
 
   str = String(str);
 
-  var parsed = compileBody(str, {
+  const parsed = compileBody(str, {
     compileDebug: options.compileDebug !== false,
     filename: options.filename,
     basedir: options.basedir,
@@ -284,8 +272,8 @@ exports.compile = function (str, options) {
     plugins: options.plugins,
   });
 
-  var res = options.inlineRuntimeFunctions
-    ? new Function('', parsed.body + ';return template;')()
+  const res = options.inlineRuntimeFunctions
+    ? new Function('', `${parsed.body};return template;`)()
     : runtimeWrap(parsed.body);
 
   res.dependencies = parsed.dependencies;
@@ -314,7 +302,7 @@ exports.compileClientWithDependenciesTracked = function (str, options) {
   var options = options || {};
 
   str = String(str);
-  var parsed = compileBody(str, {
+  const parsed = compileBody(str, {
     compileDebug: options.compileDebug,
     filename: options.filename,
     basedir: options.basedir,
@@ -332,16 +320,16 @@ exports.compileClientWithDependenciesTracked = function (str, options) {
     plugins: options.plugins,
   });
 
-  var body = parsed.body;
+  let {body} = parsed;
 
   if (options.module) {
     if (options.inlineRuntimeFunctions === false) {
-      body = 'var pug = require("pug-runtime");' + body;
+      body = `var pug = require("pug-runtime");${body}`;
     }
-    body += ' module.exports = ' + (options.name || 'template') + ';';
+    body += ` module.exports = ${options.name || 'template'};`;
   }
 
-  return {body: body, dependencies: parsed.dependencies};
+  return {body, dependencies: parsed.dependencies};
 };
 
 /**
@@ -400,11 +388,11 @@ exports.compileFile = function (path, options) {
 
 exports.render = function (str, options, fn) {
   // support callback API
-  if ('function' == typeof options) {
+  if (typeof options === 'function') {
     (fn = options), (options = undefined);
   }
   if (typeof fn === 'function') {
-    var res;
+    let res;
     try {
       res = exports.render(str, options);
     } catch (ex) {
@@ -435,11 +423,11 @@ exports.render = function (str, options, fn) {
 
 exports.renderFile = function (path, options, fn) {
   // support callback API
-  if ('function' == typeof options) {
+  if (typeof options === 'function') {
     (fn = options), (options = undefined);
   }
   if (typeof fn === 'function') {
-    var res;
+    let res;
     try {
       res = exports.renderFile(path, options);
     } catch (ex) {
@@ -464,7 +452,7 @@ exports.renderFile = function (path, options, fn) {
  */
 
 exports.compileFileClient = function (path, options) {
-  var key = path + ':client';
+  const key = `${path}:client`;
   options = options || {};
 
   options.filename = path;
@@ -473,8 +461,8 @@ exports.compileFileClient = function (path, options) {
     return exports.cache[key];
   }
 
-  var str = fs.readFileSync(options.filename, 'utf8');
-  var out = exports.compileClient(str, options);
+  const str = fs.readFileSync(options.filename, 'utf8');
+  const out = exports.compileClient(str, options);
   if (options.cache) exports.cache[key] = out;
   return out;
 };

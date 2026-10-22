@@ -2,9 +2,9 @@
  * Module dependencies.
  */
 
-var pug = require('../');
+const pug = require('..');
 
-pug.renderFile(__dirname + '/layout.pug', {debug: true}, function (err, html) {
+pug.renderFile(`${__dirname}/layout.pug`, {debug: true}, (err, html) => {
   if (err) throw err;
   console.log(html);
 });

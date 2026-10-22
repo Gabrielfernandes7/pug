@@ -2,14 +2,16 @@
  * Module dependencies.
  */
 
-var pug = require('../'),
-  path = __dirname + '/mixins.pug',
-  str = require('fs').readFileSync(path, 'utf8'),
-  fn = pug.compile(str, {filename: path, pretty: true});
+const pug = require('..');
 
-var user = {
+const path = `${__dirname}/mixins.pug`;
+const str = require('fs').readFileSync(path, 'utf8');
+
+const fn = pug.compile(str, {filename: path, pretty: true});
+
+const user = {
   name: 'tj',
   pets: ['tobi', 'loki', 'jane', 'manny'],
 };
 
-console.log(fn({user: user}));
+console.log(fn({user}));

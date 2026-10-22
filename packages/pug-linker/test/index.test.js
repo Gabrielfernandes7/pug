@@ -1,23 +1,25 @@
-var assert = require('assert');
-var fs = require('fs');
-var link = require('../');
+const assert = require('assert');
+const fs = require('fs');
+const link = require('..');
 
 function testDir(dir) {
-  fs.readdirSync(dir).forEach(function (name) {
+  fs.readdirSync(dir).forEach((name) => {
     if (!/\.input\.json$/.test(name)) return;
-    test(name, function () {
-      var actual = link(JSON.parse(fs.readFileSync(dir + '/' + name, 'utf8')));
+    test(name, () => {
+      const actual = link(
+        JSON.parse(fs.readFileSync(`${dir}/${name}`, 'utf8'))
+      );
       expect(actual).toMatchSnapshot();
     });
   });
 }
 
 function testDirError(dir) {
-  fs.readdirSync(dir).forEach(function (name) {
+  fs.readdirSync(dir).forEach((name) => {
     if (!/\.input\.json$/.test(name)) return;
-    test(name, function () {
-      var input = JSON.parse(fs.readFileSync(dir + '/' + name, 'utf8'));
-      var err;
+    test(name, () => {
+      const input = JSON.parse(fs.readFileSync(`${dir}/${name}`, 'utf8'));
+      let err;
       try {
         link(input);
       } catch (ex) {
@@ -33,14 +35,14 @@ function testDirError(dir) {
   });
 }
 
-describe('cases from pug', function () {
-  testDir(__dirname + '/cases');
+describe('cases from pug', () => {
+  testDir(`${__dirname}/cases`);
 });
 
-describe('special cases', function () {
-  testDir(__dirname + '/special-cases');
+describe('special cases', () => {
+  testDir(`${__dirname}/special-cases`);
 });
 
-describe('error handling', function () {
-  testDirError(__dirname + '/errors');
+describe('error handling', () => {
+  testDirError(`${__dirname}/errors`);
 });

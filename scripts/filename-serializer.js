@@ -1,5 +1,6 @@
 const path = require('path');
-const basedir = path.resolve(__dirname + '/..');
+
+const basedir = path.resolve(`${__dirname}/..`);
 
 function matchesBasedir(value) {
   return (
@@ -8,20 +9,20 @@ function matchesBasedir(value) {
   );
 }
 function removeBasedir(value) {
-  return '<basedir>' + value.substr(basedir.length).replace(/\\/g, '/');
+  return `<basedir>${value.substr(basedir.length).replace(/\\/g, '/')}`;
 }
 // filename serializer that removes the basedir
 module.exports = {
-  test: function (val) {
+  test(val) {
     return (
       val &&
       typeof val === 'object' &&
       (matchesBasedir(val.filename) || matchesBasedir(val.message))
     );
   },
-  print: function (val, serialize, indent) {
+  print(val, serialize, indent) {
     const output = {};
-    for (var key in val) {
+    for (const key in val) {
       output[key] = val[key];
     }
     if (matchesBasedir(output.filename)) {

@@ -1,10 +1,10 @@
-var fs = require('fs');
-var acorn = require('acorn');
-var walk = require('acorn-walk');
+const fs = require('fs');
+const acorn = require('acorn');
+const walk = require('acorn-walk');
 
-var hadErrors = false;
+let hadErrors = false;
 
-var lexerFunctions = {
+const lexerFunctions = {
   advance: true,
   append: true,
   attributesBlock: true,
@@ -48,11 +48,11 @@ var lexerFunctions = {
 };
 
 function checkDirectCalls(node) {
-  var callee = node.callee;
+  const {callee} = node;
   if (callee.type !== 'MemberExpression') return;
   if (callee.object.type !== 'ThisExpression') return;
-  var property = callee.property;
-  var func;
+  const {property} = callee;
+  let func;
   if (callee.computed) {
     if (property.type !== 'Literal') return;
     func = property.value;
@@ -61,23 +61,17 @@ function checkDirectCalls(node) {
   }
   if (!lexerFunctions[func]) return;
   console.log(
-    'index.js:' +
-      node.loc.start.line +
-      ':' +
-      node.loc.start.column +
-      ': Lexer function ' +
-      func +
-      ' called directly'
+    `index.js:${node.loc.start.line}:${node.loc.start.column}: Lexer function ${func} called directly`
   );
   hadErrors = true;
 }
 
 function checkMissingLexerFunction(node) {
-  var callee = node.callee;
+  const {callee} = node;
   if (callee.type !== 'MemberExpression') return;
   if (callee.object.type !== 'ThisExpression') return;
-  var property = callee.property;
-  var func;
+  const {property} = callee;
+  let func;
   if (callee.computed) {
     if (property.type !== 'Literal') return;
     func = property.value;
@@ -90,21 +84,15 @@ function checkMissingLexerFunction(node) {
   func = node.arguments[0].value;
   if (lexerFunctions[func]) return;
   console.log(
-    'index.js:' +
-      node.loc.start.line +
-      ':' +
-      node.loc.start.column +
-      ': Lexer function ' +
-      func +
-      ' not in lexerFunctions list'
+    `index.js:${node.loc.start.line}:${node.loc.start.column}: Lexer function ${func} not in lexerFunctions list`
   );
   hadErrors = true;
 }
 test('lexer functions', () => {
-  var str = fs.readFileSync(__dirname + '/../index.js', 'utf8');
-  var ast = acorn.parse(str, {locations: true});
+  const str = fs.readFileSync(`${__dirname}/../index.js`, 'utf8');
+  const ast = acorn.parse(str, {locations: true});
   walk.simple(ast, {
-    CallExpression: function (node) {
+    CallExpression(node) {
       checkDirectCalls(node);
       checkMissingLexerFunction(node);
     },

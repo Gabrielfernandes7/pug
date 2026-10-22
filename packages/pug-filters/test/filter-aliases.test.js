@@ -1,6 +1,6 @@
 const lex = require('pug-lexer');
 const parse = require('pug-parser');
-const handleFilters = require('../').handleFilters;
+const {handleFilters} = require('..');
 
 const customFilters = {};
 test('filters can be aliased', () => {

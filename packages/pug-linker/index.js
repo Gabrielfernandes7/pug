@@ -1,7 +1,5 @@
-'use strict';
-
-var assert = require('assert');
-var walk = require('pug-walk');
+const assert = require('assert');
+const walk = require('pug-walk');
 
 function error() {
   throw require('pug-error').apply(null, arguments);
@@ -13,9 +11,9 @@ function link(ast) {
     ast.type === 'Block',
     'The top level element should always be a block'
   );
-  var extendsNode = null;
+  let extendsNode = null;
   if (ast.nodes.length) {
-    var hasExtends = ast.nodes[0].type === 'Extends';
+    const hasExtends = ast.nodes[0].type === 'Extends';
     checkExtendPosition(ast, hasExtends);
     if (hasExtends) {
       extendsNode = ast.nodes.shift();
@@ -24,8 +22,8 @@ function link(ast) {
   ast = applyIncludes(ast);
   ast.declaredBlocks = findDeclaredBlocks(ast);
   if (extendsNode) {
-    var mixins = [];
-    var expectedBlocks = [];
+    const mixins = [];
+    const expectedBlocks = [];
     ast.nodes.forEach(function addNode(node) {
       if (node.type === 'NamedBlock') {
         expectedBlocks.push(node);
@@ -41,24 +39,24 @@ function link(ast) {
         );
       }
     });
-    var parent = link(extendsNode.file.ast);
+    const parent = link(extendsNode.file.ast);
     extend(parent.declaredBlocks, ast);
-    var foundBlockNames = [];
-    walk(parent, function (node) {
+    const foundBlockNames = [];
+    walk(parent, (node) => {
       if (node.type === 'NamedBlock') {
         foundBlockNames.push(node.name);
       }
     });
-    expectedBlocks.forEach(function (expectedBlock) {
+    expectedBlocks.forEach((expectedBlock) => {
       if (foundBlockNames.indexOf(expectedBlock.name) === -1) {
         error(
           'UNEXPECTED_BLOCK',
-          'Unexpected block ' + expectedBlock.name,
+          `Unexpected block ${expectedBlock.name}`,
           expectedBlock
         );
       }
     });
-    Object.keys(ast.declaredBlocks).forEach(function (name) {
+    Object.keys(ast.declaredBlocks).forEach((name) => {
       parent.declaredBlocks[name] = ast.declaredBlocks[name];
     });
     parent.nodes = mixins.concat(parent.nodes);
@@ -68,9 +66,9 @@ function link(ast) {
   return ast;
 }
 
-function findDeclaredBlocks(ast) /*: {[name: string]: Array<BlockNode>}*/ {
-  var definitions = {};
-  walk(ast, function before(node) {
+function findDeclaredBlocks(ast) /*: {[name: string]: Array<BlockNode>} */ {
+  const definitions = {};
+  walk(ast, (node) => {
     if (node.type === 'NamedBlock' && node.mode === 'replace') {
       definitions[node.name] = definitions[node.name] || [];
       definitions[node.name].push(node);
@@ -81,7 +79,7 @@ function findDeclaredBlocks(ast) /*: {[name: string]: Array<BlockNode>}*/ {
 
 function flattenParentBlocks(parentBlocks, accumulator) {
   accumulator = accumulator || [];
-  parentBlocks.forEach(function (parentBlock) {
+  parentBlocks.forEach((parentBlock) => {
     if (parentBlock.parents) {
       flattenParentBlocks(parentBlock.parents, accumulator);
     }
@@ -91,21 +89,21 @@ function flattenParentBlocks(parentBlocks, accumulator) {
 }
 
 function extend(parentBlocks, ast) {
-  var stack = {};
+  const stack = {};
   walk(
     ast,
-    function before(node) {
+    (node) => {
       if (node.type === 'NamedBlock') {
         if (stack[node.name] === node.name) {
           return (node.ignore = true);
         }
         stack[node.name] = node.name;
-        var parentBlockList = parentBlocks[node.name]
+        const parentBlockList = parentBlocks[node.name]
           ? flattenParentBlocks(parentBlocks[node.name])
           : [];
         if (parentBlockList.length) {
           node.parents = parentBlockList;
-          parentBlockList.forEach(function (parentBlock) {
+          parentBlockList.forEach((parentBlock) => {
             switch (node.mode) {
               case 'append':
                 parentBlock.nodes = parentBlock.nodes.concat(node.nodes);
@@ -121,7 +119,7 @@ function extend(parentBlocks, ast) {
         }
       }
     },
-    function after(node) {
+    (node) => {
       if (node.type === 'NamedBlock' && !node.ignore) {
         delete stack[node.name];
       }
@@ -132,14 +130,14 @@ function extend(parentBlocks, ast) {
 function applyIncludes(ast, child) {
   return walk(
     ast,
-    function before(node, replace) {
+    (node, replace) => {
       if (node.type === 'RawInclude') {
         replace({type: 'Text', val: node.file.str.replace(/\r/g, '')});
       }
     },
-    function after(node, replace) {
+    (node, replace) => {
       if (node.type === 'Include') {
-        var childAST = link(node.file.ast);
+        let childAST = link(node.file.ast);
         if (childAST.hasExtends) {
           childAST = removeBlocks(childAST);
         }
@@ -149,7 +147,7 @@ function applyIncludes(ast, child) {
   );
 }
 function removeBlocks(ast) {
-  return walk(ast, function (node, replace) {
+  return walk(ast, (node, replace) => {
     if (node.type === 'NamedBlock') {
       replace({
         type: 'Block',
@@ -161,8 +159,8 @@ function removeBlocks(ast) {
 
 function applyYield(ast, block) {
   if (!block || !block.nodes.length) return ast;
-  var replaced = false;
-  ast = walk(ast, null, function (node, replace) {
+  let replaced = false;
+  ast = walk(ast, null, (node, replace) => {
     if (node.type === 'YieldBlock') {
       replaced = true;
       node.type = 'Block';
@@ -170,8 +168,8 @@ function applyYield(ast, block) {
     }
   });
   function defaultYieldLocation(node) {
-    var res = node;
-    for (var i = 0; i < node.nodes.length; i++) {
+    let res = node;
+    for (let i = 0; i < node.nodes.length; i++) {
       if (node.nodes[i].textOnly) continue;
       if (node.nodes[i].type === 'Block') {
         res = defaultYieldLocation(node.nodes[i]);
@@ -189,8 +187,8 @@ function applyYield(ast, block) {
 }
 
 function checkExtendPosition(ast, hasExtends) {
-  var legitExtendsReached = false;
-  walk(ast, function (node) {
+  let legitExtendsReached = false;
+  walk(ast, (node) => {
     if (node.type === 'Extends') {
       if (hasExtends && !legitExtendsReached) {
         legitExtendsReached = true;

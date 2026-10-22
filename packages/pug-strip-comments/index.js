@@ -1,31 +1,29 @@
-'use strict';
-
-var error = require('pug-error');
+const error = require('pug-error');
 
 module.exports = stripComments;
 
 function unexpectedToken(type, occasion, filename, line) {
-  var msg = '`' + type + '` encountered when ' + occasion;
-  throw error('UNEXPECTED_TOKEN', msg, {filename: filename, line: line});
+  const msg = `\`${type}\` encountered when ${occasion}`;
+  throw error('UNEXPECTED_TOKEN', msg, {filename, line});
 }
 
 function stripComments(input, options) {
   options = options || {};
 
   // Default: strip unbuffered comments and leave buffered ones alone
-  var stripUnbuffered = options.stripUnbuffered !== false;
-  var stripBuffered = options.stripBuffered === true;
-  var filename = options.filename;
+  const stripUnbuffered = options.stripUnbuffered !== false;
+  const stripBuffered = options.stripBuffered === true;
+  const {filename} = options;
 
-  var out = [];
+  const out = [];
   // If we have encountered a comment token and are not sure if we have gotten
   // out of the comment or not
-  var inComment = false;
+  let inComment = false;
   // If we are sure that we are in a block comment and all tokens except
   // `end-pipeless-text` should be ignored
-  var inPipelessText = false;
+  let inPipelessText = false;
 
-  return input.filter(function (tok) {
+  return input.filter((tok) => {
     switch (tok.type) {
       case 'comment':
         if (inComment) {

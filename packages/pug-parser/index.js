@@ -1,15 +1,13 @@
-'use strict';
-
-var assert = require('assert');
-var TokenStream = require('token-stream');
-var error = require('pug-error');
-var inlineTags = require('./lib/inline-tags');
+const assert = require('assert');
+const TokenStream = require('token-stream');
+const error = require('pug-error');
+const inlineTags = require('./lib/inline-tags');
 
 module.exports = parse;
 module.exports.Parser = Parser;
 function parse(tokens, options) {
-  var parser = new Parser(tokens, options);
-  var ast = parser.parse();
+  const parser = new Parser(tokens, options);
+  const ast = parser.parse();
   return JSON.parse(JSON.stringify(ast));
 }
 
@@ -26,12 +24,12 @@ function Parser(tokens, options) {
   options = options || {};
   if (!Array.isArray(tokens)) {
     throw new Error(
-      'Expected tokens to be an Array but got "' + typeof tokens + '"'
+      `Expected tokens to be an Array but got "${typeof tokens}"`
     );
   }
   if (typeof options !== 'object') {
     throw new Error(
-      'Expected "options" to be an object but got "' + typeof options + '"'
+      `Expected "options" to be an object but got "${typeof options}"`
     );
   }
   this.tokens = new TokenStream(tokens);
@@ -52,8 +50,8 @@ Parser.prototype = {
 
   constructor: Parser,
 
-  error: function (code, message, token) {
-    var err = error(code, message, {
+  error(code, message, token) {
+    const err = error(code, message, {
       line: token.loc.start.line,
       column: token.loc.start.column,
       filename: this.filename,
@@ -69,7 +67,7 @@ Parser.prototype = {
    * @api private
    */
 
-  advance: function () {
+  advance() {
     return this.tokens.advance();
   },
 
@@ -80,7 +78,7 @@ Parser.prototype = {
    * @api private
    */
 
-  peek: function () {
+  peek() {
     return this.tokens.peek();
   },
 
@@ -92,7 +90,7 @@ Parser.prototype = {
    * @api private
    */
 
-  lookahead: function (n) {
+  lookahead(n) {
     return this.tokens.lookahead(n);
   },
 
@@ -103,16 +101,16 @@ Parser.prototype = {
    * @api public
    */
 
-  parse: function () {
-    var block = this.emptyBlock(0);
+  parse() {
+    const block = this.emptyBlock(0);
 
-    while ('eos' != this.peek().type) {
-      if ('newline' == this.peek().type) {
+    while (this.peek().type != 'eos') {
+      if (this.peek().type == 'newline') {
         this.advance();
-      } else if ('text-html' == this.peek().type) {
+      } else if (this.peek().type == 'text-html') {
         block.nodes = block.nodes.concat(this.parseTextHtml());
       } else {
-        var expr = this.parseExpr();
+        const expr = this.parseExpr();
         if (expr) {
           if (expr.type === 'Block') {
             block.nodes = block.nodes.concat(expr.nodes);
@@ -133,16 +131,15 @@ Parser.prototype = {
    * @api private
    */
 
-  expect: function (type) {
+  expect(type) {
     if (this.peek().type === type) {
       return this.advance();
-    } else {
-      this.error(
-        'INVALID_TOKEN',
-        'expected "' + type + '", but got "' + this.peek().type + '"',
-        this.peek()
-      );
     }
+    this.error(
+      'INVALID_TOKEN',
+      `expected "${type}", but got "${this.peek().type}"`,
+      this.peek()
+    );
   },
 
   /**
@@ -152,45 +149,45 @@ Parser.prototype = {
    * @api private
    */
 
-  accept: function (type) {
+  accept(type) {
     if (this.peek().type === type) {
       return this.advance();
     }
   },
 
-  initBlock: function (line, nodes) {
+  initBlock(line, nodes) {
     /* istanbul ignore if */
     if ((line | 0) !== line) throw new Error('`line` is not an integer');
     /* istanbul ignore if */
     if (!Array.isArray(nodes)) throw new Error('`nodes` is not an array');
     return {
       type: 'Block',
-      nodes: nodes,
-      line: line,
+      nodes,
+      line,
       filename: this.filename,
     };
   },
 
-  emptyBlock: function (line) {
+  emptyBlock(line) {
     return this.initBlock(line, []);
   },
 
-  runPlugin: function (context, tok) {
-    var rest = [this];
+  runPlugin(context, tok) {
+    const rest = [this];
     for (var i = 2; i < arguments.length; i++) {
       rest.push(arguments[i]);
     }
-    var pluginContext;
+    let pluginContext;
     for (var i = 0; i < this.plugins.length; i++) {
-      var plugin = this.plugins[i];
+      const plugin = this.plugins[i];
       if (plugin[context] && plugin[context][tok.type]) {
-        if (pluginContext)
+        if (pluginContext) {
           throw new Error(
-            'Multiple plugin handlers found for context ' +
-              JSON.stringify(context) +
-              ', token type ' +
-              JSON.stringify(tok.type)
+            `Multiple plugin handlers found for context ${JSON.stringify(
+              context
+            )}, token type ${JSON.stringify(tok.type)}`
           );
+        }
         pluginContext = plugin[context];
       }
     }
@@ -216,7 +213,7 @@ Parser.prototype = {
    * | interpolation
    */
 
-  parseExpr: function () {
+  parseExpr() {
     switch (this.peek().type) {
       case 'tag':
         return this.parseTag();
@@ -279,13 +276,13 @@ Parser.prototype = {
         if (pluginResult) return pluginResult;
         this.error(
           'INVALID_TOKEN',
-          'unexpected token "' + this.peek().type + '"',
+          `unexpected token "${this.peek().type}"`,
           this.peek()
         );
     }
   },
 
-  parseDot: function () {
+  parseDot() {
     this.advance();
     return this.parseTextBlock();
   },
@@ -294,10 +291,10 @@ Parser.prototype = {
    * Text
    */
 
-  parseText: function (options) {
-    var tags = [];
-    var lineno = this.peek().loc.start.line;
-    var nextTok = this.peek();
+  parseText(options) {
+    const tags = [];
+    const lineno = this.peek().loc.start.line;
+    let nextTok = this.peek();
     loop: while (true) {
       switch (nextTok.type) {
         case 'text':
@@ -350,12 +347,12 @@ Parser.prototype = {
       nextTok = this.peek();
     }
     if (tags.length === 1) return tags[0];
-    else return this.initBlock(lineno, tags);
+    return this.initBlock(lineno, tags);
   },
 
-  parseTextHtml: function () {
-    var nodes = [];
-    var currentNode = null;
+  parseTextHtml() {
+    const nodes = [];
+    let currentNode = null;
     loop: while (true) {
       switch (this.peek().type) {
         case 'text-html':
@@ -371,18 +368,18 @@ Parser.prototype = {
             };
             nodes.push(currentNode);
           } else {
-            currentNode.val += '\n' + text.val;
+            currentNode.val += `\n${text.val}`;
           }
           break;
         case 'indent':
           var block = this.block();
-          block.nodes.forEach(function (node) {
+          block.nodes.forEach((node) => {
             if (node.isHtml) {
               if (!currentNode) {
                 currentNode = node;
                 nodes.push(currentNode);
               } else {
-                currentNode.val += '\n' + node.val;
+                currentNode.val += `\n${node.val}`;
               }
             } else {
               currentNode = null;
@@ -409,25 +406,24 @@ Parser.prototype = {
    * | block
    */
 
-  parseBlockExpansion: function () {
-    var tok = this.accept(':');
+  parseBlockExpansion() {
+    const tok = this.accept(':');
     if (tok) {
-      var expr = this.parseExpr();
+      const expr = this.parseExpr();
       return expr.type === 'Block'
         ? expr
         : this.initBlock(tok.loc.start.line, [expr]);
-    } else {
-      return this.block();
     }
+    return this.block();
   },
 
   /**
    * case
    */
 
-  parseCase: function () {
-    var tok = this.expect('case');
-    var node = {
+  parseCase() {
+    const tok = this.expect('case');
+    const node = {
       type: 'Case',
       expr: tok.val,
       line: tok.loc.start.line,
@@ -435,9 +431,9 @@ Parser.prototype = {
       filename: this.filename,
     };
 
-    var block = this.emptyBlock(tok.loc.start.line + 1);
+    const block = this.emptyBlock(tok.loc.start.line + 1);
     this.expect('indent');
-    while ('outdent' != this.peek().type) {
+    while (this.peek().type != 'outdent') {
       switch (this.peek().type) {
         case 'comment':
         case 'newline':
@@ -454,9 +450,9 @@ Parser.prototype = {
           if (pluginResult) break;
           this.error(
             'INVALID_TOKEN',
-            'Unexpected token "' +
-              this.peek().type +
-              '", expected "when", "default" or "newline"',
+            `Unexpected token "${
+              this.peek().type
+            }", expected "when", "default" or "newline"`,
             this.peek()
           );
       }
@@ -472,8 +468,8 @@ Parser.prototype = {
    * when
    */
 
-  parseWhen: function () {
-    var tok = this.expect('when');
+  parseWhen() {
+    const tok = this.expect('when');
     if (this.peek().type !== 'newline') {
       return {
         type: 'When',
@@ -484,24 +480,23 @@ Parser.prototype = {
         column: tok.loc.start.column,
         filename: this.filename,
       };
-    } else {
-      return {
-        type: 'When',
-        expr: tok.val,
-        debug: false,
-        line: tok.loc.start.line,
-        column: tok.loc.start.column,
-        filename: this.filename,
-      };
     }
+    return {
+      type: 'When',
+      expr: tok.val,
+      debug: false,
+      line: tok.loc.start.line,
+      column: tok.loc.start.column,
+      filename: this.filename,
+    };
   },
 
   /**
    * default
    */
 
-  parseDefault: function () {
-    var tok = this.expect('default');
+  parseDefault() {
+    const tok = this.expect('default');
     return {
       type: 'When',
       expr: 'default',
@@ -517,13 +512,13 @@ Parser.prototype = {
    * code
    */
 
-  parseCode: function (noBlock) {
-    var tok = this.expect('code');
+  parseCode(noBlock) {
+    const tok = this.expect('code');
     assert(
       typeof tok.mustEscape === 'boolean',
       'Please update to the newest version of pug-lexer.'
     );
-    var node = {
+    const node = {
       type: 'Code',
       val: tok.val,
       buffer: tok.buffer,
@@ -538,10 +533,10 @@ Parser.prototype = {
 
     if (noBlock) return node;
 
-    var block;
+    let block;
 
     // handle block
-    block = 'indent' == this.peek().type;
+    block = this.peek().type == 'indent';
     if (block) {
       if (tok.buffer) {
         this.error(
@@ -555,9 +550,9 @@ Parser.prototype = {
 
     return node;
   },
-  parseConditional: function () {
-    var tok = this.expect('if');
-    var node = {
+  parseConditional() {
+    let tok = this.expect('if');
+    const node = {
       type: 'Conditional',
       test: tok.val,
       consequent: this.emptyBlock(tok.loc.start.line),
@@ -568,11 +563,11 @@ Parser.prototype = {
     };
 
     // handle block
-    if ('indent' == this.peek().type) {
+    if (this.peek().type == 'indent') {
       node.consequent = this.block();
     }
 
-    var currentNode = node;
+    let currentNode = node;
     while (true) {
       if (this.peek().type === 'newline') {
         this.expect('newline');
@@ -587,7 +582,7 @@ Parser.prototype = {
           column: tok.loc.start.column,
           filename: this.filename,
         };
-        if ('indent' == this.peek().type) {
+        if (this.peek().type == 'indent') {
           currentNode.consequent = this.block();
         }
       } else if (this.peek().type === 'else') {
@@ -603,9 +598,9 @@ Parser.prototype = {
 
     return node;
   },
-  parseWhile: function () {
-    var tok = this.expect('while');
-    var node = {
+  parseWhile() {
+    const tok = this.expect('while');
+    const node = {
       type: 'While',
       test: tok.val,
       line: tok.loc.start.line,
@@ -614,7 +609,7 @@ Parser.prototype = {
     };
 
     // handle block
-    if ('indent' == this.peek().type) {
+    if (this.peek().type == 'indent') {
       node.block = this.block();
     } else {
       node.block = this.emptyBlock(tok.loc.start.line);
@@ -627,12 +622,12 @@ Parser.prototype = {
    * block code
    */
 
-  parseBlockCode: function () {
-    var tok = this.expect('blockcode');
-    var line = tok.loc.start.line;
-    var column = tok.loc.start.column;
-    var body = this.peek();
-    var text = '';
+  parseBlockCode() {
+    let tok = this.expect('blockcode');
+    const {line} = tok.loc.start;
+    const {column} = tok.loc.start;
+    const body = this.peek();
+    let text = '';
     if (body.type === 'start-pipeless-text') {
       this.advance();
       while (this.peek().type !== 'end-pipeless-text') {
@@ -652,7 +647,7 @@ Parser.prototype = {
             }
             this.error(
               'INVALID_TOKEN',
-              'Unexpected token type: ' + tok.type,
+              `Unexpected token type: ${tok.type}`,
               tok
             );
         }
@@ -665,8 +660,8 @@ Parser.prototype = {
       buffer: false,
       mustEscape: false,
       isInline: false,
-      line: line,
-      column: column,
+      line,
+      column,
       filename: this.filename,
     };
   },
@@ -674,37 +669,36 @@ Parser.prototype = {
    * comment
    */
 
-  parseComment: function () {
-    var tok = this.expect('comment');
-    var block;
+  parseComment() {
+    const tok = this.expect('comment');
+    let block;
     if ((block = this.parseTextBlock())) {
       return {
         type: 'BlockComment',
         val: tok.val,
-        block: block,
-        buffer: tok.buffer,
-        line: tok.loc.start.line,
-        column: tok.loc.start.column,
-        filename: this.filename,
-      };
-    } else {
-      return {
-        type: 'Comment',
-        val: tok.val,
+        block,
         buffer: tok.buffer,
         line: tok.loc.start.line,
         column: tok.loc.start.column,
         filename: this.filename,
       };
     }
+    return {
+      type: 'Comment',
+      val: tok.val,
+      buffer: tok.buffer,
+      line: tok.loc.start.line,
+      column: tok.loc.start.column,
+      filename: this.filename,
+    };
   },
 
   /**
    * doctype
    */
 
-  parseDoctype: function () {
-    var tok = this.expect('doctype');
+  parseDoctype() {
+    const tok = this.expect('doctype');
     return {
       type: 'Doctype',
       val: tok.val,
@@ -714,9 +708,9 @@ Parser.prototype = {
     };
   },
 
-  parseIncludeFilter: function () {
-    var tok = this.expect('filter');
-    var attrs = [];
+  parseIncludeFilter() {
+    const tok = this.expect('filter');
+    let attrs = [];
 
     if (this.peek().type === 'start-attributes') {
       attrs = this.attrs();
@@ -725,7 +719,7 @@ Parser.prototype = {
     return {
       type: 'IncludeFilter',
       name: tok.val,
-      attrs: attrs,
+      attrs,
       line: tok.loc.start.line,
       column: tok.loc.start.column,
       filename: this.filename,
@@ -736,17 +730,17 @@ Parser.prototype = {
    * filter attrs? text-block
    */
 
-  parseFilter: function () {
-    var tok = this.expect('filter');
-    var block,
-      attrs = [];
+  parseFilter() {
+    const tok = this.expect('filter');
+    let block;
+    let attrs = [];
 
     if (this.peek().type === 'start-attributes') {
       attrs = this.attrs();
     }
 
     if (this.peek().type === 'text') {
-      var textToken = this.advance();
+      const textToken = this.advance();
       block = this.initBlock(textToken.loc.start.line, [
         {
           type: 'Text',
@@ -765,8 +759,8 @@ Parser.prototype = {
     return {
       type: 'Filter',
       name: tok.val,
-      block: block,
-      attrs: attrs,
+      block,
+      attrs,
       line: tok.loc.start.line,
       column: tok.loc.start.column,
       filename: this.filename,
@@ -777,9 +771,9 @@ Parser.prototype = {
    * each block
    */
 
-  parseEach: function () {
-    var tok = this.expect('each');
-    var node = {
+  parseEach() {
+    const tok = this.expect('each');
+    const node = {
       type: 'Each',
       obj: tok.code,
       val: tok.val,
@@ -796,9 +790,9 @@ Parser.prototype = {
     return node;
   },
 
-  parseEachOf: function () {
-    var tok = this.expect('eachOf');
-    var node = {
+  parseEachOf() {
+    const tok = this.expect('eachOf');
+    const node = {
       type: 'EachOf',
       obj: tok.code,
       val: tok.val,
@@ -813,9 +807,9 @@ Parser.prototype = {
    * 'extends' name
    */
 
-  parseExtends: function () {
-    var tok = this.expect('extends');
-    var path = this.expect('path');
+  parseExtends() {
+    const tok = this.expect('extends');
+    const path = this.expect('path');
     return {
       type: 'Extends',
       file: {
@@ -835,11 +829,11 @@ Parser.prototype = {
    * 'block' name block
    */
 
-  parseBlock: function () {
-    var tok = this.expect('block');
+  parseBlock() {
+    const tok = this.expect('block');
 
-    var node =
-      'indent' == this.peek().type
+    const node =
+      this.peek().type == 'indent'
         ? this.block()
         : this.emptyBlock(tok.loc.start.line);
     node.type = 'NamedBlock';
@@ -851,8 +845,8 @@ Parser.prototype = {
     return node;
   },
 
-  parseMixinBlock: function () {
-    var tok = this.expect('mixin-block');
+  parseMixinBlock() {
+    const tok = this.expect('mixin-block');
     if (!this.inMixin) {
       this.error(
         'BLOCK_OUTISDE_MIXIN',
@@ -868,8 +862,8 @@ Parser.prototype = {
     };
   },
 
-  parseYield: function () {
-    var tok = this.expect('yield');
+  parseYield() {
+    const tok = this.expect('yield');
     return {
       type: 'YieldBlock',
       line: tok.loc.start.line,
@@ -882,9 +876,9 @@ Parser.prototype = {
    * include block?
    */
 
-  parseInclude: function () {
-    var tok = this.expect('include');
-    var node = {
+  parseInclude() {
+    const tok = this.expect('include');
+    const node = {
       type: 'Include',
       file: {
         type: 'FileReference',
@@ -894,11 +888,11 @@ Parser.prototype = {
       column: tok.loc.start.column,
       filename: this.filename,
     };
-    var filters = [];
+    const filters = [];
     while (this.peek().type === 'filter') {
       filters.push(this.parseIncludeFilter());
     }
-    var path = this.expect('path');
+    const path = this.expect('path');
 
     node.file.path = path.val.trim();
     node.file.line = path.loc.start.line;
@@ -909,17 +903,12 @@ Parser.prototype = {
       !filters.length
     ) {
       node.block =
-        'indent' == this.peek().type
+        this.peek().type == 'indent'
           ? this.block()
           : this.emptyBlock(tok.loc.start.line);
       if (/\.jade$/.test(node.file.path)) {
         console.warn(
-          this.filename +
-            ', line ' +
-            tok.loc.start.line +
-            ':\nThe .jade extension is deprecated, use .pug for "' +
-            node.file.path +
-            '".'
+          `${this.filename}, line ${tok.loc.start.line}:\nThe .jade extension is deprecated, use .pug for "${node.file.path}".`
         );
       }
     } else {
@@ -940,14 +929,14 @@ Parser.prototype = {
    * call ident block
    */
 
-  parseCall: function () {
-    var tok = this.expect('call');
-    var name = tok.val;
-    var args = tok.args;
-    var mixin = {
+  parseCall() {
+    const tok = this.expect('call');
+    const name = tok.val;
+    const {args} = tok;
+    const mixin = {
       type: 'Mixin',
-      name: name,
-      args: args,
+      name,
+      args,
       block: this.emptyBlock(tok.loc.start.line),
       call: true,
       attrs: [],
@@ -970,17 +959,17 @@ Parser.prototype = {
    * mixin block
    */
 
-  parseMixin: function () {
-    var tok = this.expect('mixin');
-    var name = tok.val;
-    var args = tok.args;
+  parseMixin() {
+    const tok = this.expect('mixin');
+    const name = tok.val;
+    const {args} = tok;
 
-    if ('indent' == this.peek().type) {
+    if (this.peek().type == 'indent') {
       this.inMixin++;
-      var mixin = {
+      const mixin = {
         type: 'Mixin',
-        name: name,
-        args: args,
+        name,
+        args,
         block: this.block(),
         call: false,
         line: tok.loc.start.line,
@@ -989,23 +978,22 @@ Parser.prototype = {
       };
       this.inMixin--;
       return mixin;
-    } else {
-      this.error(
-        'MIXIN_WITHOUT_BODY',
-        'Mixin ' + name + ' declared without body',
-        tok
-      );
     }
+    this.error(
+      'MIXIN_WITHOUT_BODY',
+      `Mixin ${name} declared without body`,
+      tok
+    );
   },
 
   /**
    * indent (text | newline)* outdent
    */
 
-  parseTextBlock: function () {
+  parseTextBlock() {
     var tok = this.accept('start-pipeless-text');
     if (!tok) return;
-    var block = this.emptyBlock(tok.loc.start.line);
+    const block = this.emptyBlock(tok.loc.start.line);
     while (this.peek().type !== 'end-pipeless-text') {
       var tok = this.advance();
       switch (tok.type) {
@@ -1048,7 +1036,7 @@ Parser.prototype = {
           if (pluginResult) break;
           this.error(
             'INVALID_TOKEN',
-            'Unexpected token type: ' + tok.type,
+            `Unexpected token type: ${tok.type}`,
             tok
           );
       }
@@ -1061,16 +1049,16 @@ Parser.prototype = {
    * indent expr* outdent
    */
 
-  block: function () {
-    var tok = this.expect('indent');
-    var block = this.emptyBlock(tok.loc.start.line);
-    while ('outdent' != this.peek().type) {
-      if ('newline' == this.peek().type) {
+  block() {
+    const tok = this.expect('indent');
+    const block = this.emptyBlock(tok.loc.start.line);
+    while (this.peek().type != 'outdent') {
+      if (this.peek().type == 'newline') {
         this.advance();
-      } else if ('text-html' == this.peek().type) {
+      } else if (this.peek().type == 'text-html') {
         block.nodes = block.nodes.concat(this.parseTextHtml());
       } else {
-        var expr = this.parseExpr();
+        const expr = this.parseExpr();
         if (expr.type === 'Block') {
           block.nodes = block.nodes.concat(expr.nodes);
         } else {
@@ -1086,9 +1074,9 @@ Parser.prototype = {
    * interpolation (attrs | class | id)* (text | code | ':')? newline* block?
    */
 
-  parseInterpolation: function () {
-    var tok = this.advance();
-    var tag = {
+  parseInterpolation() {
+    const tok = this.advance();
+    const tag = {
       type: 'InterpolatedTag',
       expr: tok.val,
       selfClosing: false,
@@ -1108,9 +1096,9 @@ Parser.prototype = {
    * tag (attrs | class | id)* (text | code | ':')? newline* block?
    */
 
-  parseTag: function () {
-    var tok = this.advance();
-    var tag = {
+  parseTag() {
+    const tok = this.advance();
+    const tag = {
       type: 'Tag',
       name: tok.val,
       selfClosing: false,
@@ -1130,10 +1118,10 @@ Parser.prototype = {
    * Parse tag.
    */
 
-  tag: function (tag, options) {
-    var seenAttrs = false;
-    var attributeNames = [];
-    var selfClosingAllowed = options && options.selfClosingAllowed;
+  tag(tag, options) {
+    let seenAttrs = false;
+    const attributeNames = [];
+    const selfClosingAllowed = options && options.selfClosingAllowed;
     // (attrs | class | id)*
     out: while (true) {
       switch (this.peek().type) {
@@ -1152,7 +1140,7 @@ Parser.prototype = {
           }
           tag.attrs.push({
             name: tok.type,
-            val: "'" + tok.val + "'",
+            val: `'${tok.val}'`,
             line: tok.loc.start.line,
             column: tok.loc.start.column,
             filename: this.filename,
@@ -1162,10 +1150,9 @@ Parser.prototype = {
         case 'start-attributes':
           if (seenAttrs) {
             console.warn(
-              this.filename +
-                ', line ' +
-                this.peek().loc.start.line +
-                ':\nYou should not have pug tags with multiple attributes.'
+              `${this.filename}, line ${
+                this.peek().loc.start.line
+              }:\nYou should not have pug tags with multiple attributes.`
             );
           }
           seenAttrs = true;
@@ -1194,7 +1181,7 @@ Parser.prototype = {
     }
 
     // check immediate '.'
-    if ('dot' == this.peek().type) {
+    if (this.peek().type == 'dot') {
       tag.textOnly = true;
       this.advance();
     }
@@ -1242,24 +1229,24 @@ Parser.prototype = {
         if (pluginResult) break;
         this.error(
           'INVALID_TOKEN',
-          'Unexpected token `' +
-            this.peek().type +
-            '` expected `text`, `interpolated-code`, `code`, `:`' +
-            (selfClosingAllowed ? ', `slash`' : '') +
-            ', `newline` or `eos`',
+          `Unexpected token \`${
+            this.peek().type
+          }\` expected \`text\`, \`interpolated-code\`, \`code\`, \`:\`${
+            selfClosingAllowed ? ', `slash`' : ''
+          }, \`newline\` or \`eos\``,
           this.peek()
         );
     }
 
     // newline*
-    while ('newline' == this.peek().type) this.advance();
+    while (this.peek().type == 'newline') this.advance();
 
     // block?
     if (tag.textOnly) {
       tag.block = this.parseTextBlock() || this.emptyBlock(tag.line);
-    } else if ('indent' == this.peek().type) {
-      var block = this.block();
-      for (var i = 0, len = block.nodes.length; i < len; ++i) {
+    } else if (this.peek().type == 'indent') {
+      const block = this.block();
+      for (let i = 0, len = block.nodes.length; i < len; ++i) {
         tag.block.nodes.push(block.nodes[i]);
       }
     }
@@ -1267,17 +1254,17 @@ Parser.prototype = {
     return tag;
   },
 
-  attrs: function (attributeNames) {
+  attrs(attributeNames) {
     this.expect('start-attributes');
 
-    var attrs = [];
-    var tok = this.advance();
+    const attrs = [];
+    let tok = this.advance();
     while (tok.type === 'attribute') {
       if (tok.name !== 'class' && attributeNames) {
         if (attributeNames.indexOf(tok.name) !== -1) {
           this.error(
             'DUPLICATE_ATTRIBUTE',
-            'Duplicate attribute "' + tok.name + '" is not allowed.',
+            `Duplicate attribute "${tok.name}" is not allowed.`,
             tok
           );
         }

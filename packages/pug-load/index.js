@@ -1,34 +1,34 @@
-'use strict';
-
-var fs = require('fs');
-var path = require('path');
-var walk = require('pug-walk');
-var assign = require('object-assign');
+const fs = require('fs');
+const path = require('path');
+const walk = require('pug-walk');
+const assign = require('object-assign');
 
 module.exports = load;
 function load(ast, options) {
   options = getOptions(options);
   // clone the ast
   ast = JSON.parse(JSON.stringify(ast));
-  return walk(ast, function (node) {
+  return walk(ast, (node) => {
     if (node.str === undefined) {
       if (
         node.type === 'Include' ||
         node.type === 'RawInclude' ||
         node.type === 'Extends'
       ) {
-        var file = node.file;
+        const {file} = node;
         if (file.type !== 'FileReference') {
           throw new Error('Expected file.type to be "FileReference"');
         }
-        var path, str, raw;
+        let path;
+        let str;
+        let raw;
         try {
           path = options.resolve(file.path, file.filename, options);
           file.fullPath = path;
           raw = options.read(path, options);
           str = raw.toString('utf8');
         } catch (ex) {
-          ex.message += '\n    at ' + node.filename + ' line ' + node.line;
+          ex.message += `\n    at ${node.filename} line ${node.line}`;
           throw ex;
         }
         file.str = str;
@@ -48,31 +48,33 @@ function load(ast, options) {
 
 load.string = function loadString(src, options) {
   options = assign(getOptions(options), {
-    src: src,
+    src,
   });
-  var tokens = options.lex(src, options);
-  var ast = options.parse(tokens, options);
+  const tokens = options.lex(src, options);
+  const ast = options.parse(tokens, options);
   return load(ast, options);
 };
 load.file = function loadFile(filename, options) {
   options = assign(getOptions(options), {
-    filename: filename,
+    filename,
   });
-  var str = options.read(filename).toString('utf8');
+  const str = options.read(filename).toString('utf8');
   return load.string(str, options);
 };
 
 load.resolve = function resolve(filename, source, options) {
   filename = filename.trim();
-  if (filename[0] !== '/' && !source)
+  if (filename[0] !== '/' && !source) {
     throw new Error(
       'the "filename" option is required to use includes and extends with "relative" paths'
     );
+  }
 
-  if (filename[0] === '/' && !options.basedir)
+  if (filename[0] === '/' && !options.basedir) {
     throw new Error(
       'the "basedir" option is required to use includes and extends with "absolute" paths'
     );
+  }
 
   filename = path.join(
     filename[0] === '/' ? options.basedir : path.dirname(source.trim()),

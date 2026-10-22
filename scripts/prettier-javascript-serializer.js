@@ -4,7 +4,7 @@ const prettierOptions = {parser: 'babel'};
 
 // filename serializer that removes the basedir
 module.exports = {
-  test: function (val) {
+  test(val) {
     try {
       return (
         typeof val === 'string' &&
@@ -15,7 +15,7 @@ module.exports = {
       return false;
     }
   },
-  print: function (val, serialize, indent) {
+  print(val, serialize, indent) {
     return serialize(prettier.format(val, prettierOptions));
   },
 };
