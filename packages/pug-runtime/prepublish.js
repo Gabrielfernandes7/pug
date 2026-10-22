@@ -15,7 +15,7 @@ var ast = uglify.parse(source);
 var dependencies = {};
 var internals = {dependencies: true, internals: true};
 var sources = {};
-ast.body.forEach(function(node) {
+ast.body.forEach(function (node) {
   var name;
   switch (node.TYPE) {
     case 'Defun':
@@ -37,14 +37,14 @@ ast.body.forEach(function(node) {
   if (node.TYPE === 'Defun') {
     var ast = uglify.parse(src);
     ast.figure_out_scope();
-    var globals = ast.globals.map(function(val, key) {
+    var globals = ast.globals.map(function (val, key) {
       return key;
     });
     dependencies[name] = globals
-      .filter(function(key) {
+      .filter(function (key) {
         return /^pug\_/.test(key);
       })
-      .map(function(key) {
+      .map(function (key) {
         return key.replace(/^pug\_/, '');
       });
   }
@@ -52,7 +52,7 @@ ast.body.forEach(function(node) {
   if (!runtime[name]) internals[name] = true;
 });
 
-Object.keys(dependencies).forEach(function(fn) {
+Object.keys(dependencies).forEach(function (fn) {
   dependencies[fn] = dependencies[fn].sort();
 });
 

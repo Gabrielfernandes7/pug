@@ -108,7 +108,7 @@ function walkAST(ast, before, after, options) {
   return ast;
 
   function walkAndMergeNodes(nodes) {
-    return nodes.reduce(function(nodes, node) {
+    return nodes.reduce(function (nodes, node) {
       var result = walkAST(node, before, after, options);
       if (Array.isArray(result)) {
         return nodes.concat(result);

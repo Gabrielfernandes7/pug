@@ -9,7 +9,7 @@ module.exports = build;
 
 function build(functions) {
   var fns = [];
-  functions = functions.filter(function(fn) {
+  functions = functions.filter(function (fn) {
     return !internals[fn];
   });
   for (var i = 0; i < functions.length; i++) {
@@ -20,7 +20,7 @@ function build(functions) {
   }
   return fns
     .sort()
-    .map(function(name) {
+    .map(function (name) {
       return sources[name];
     })
     .join('\n');

@@ -22,7 +22,7 @@ module.exports = compileAttrs;
 function compileAttrs(attrs, options) {
   assert(Array.isArray(attrs), 'Attrs should be an array');
   assert(
-    attrs.every(function(attr) {
+    attrs.every(function (attr) {
       return (
         attr &&
         typeof attr === 'object' &&
@@ -93,7 +93,7 @@ function compileAttrs(attrs, options) {
     }
   }
 
-  attrs.forEach(function(attr) {
+  attrs.forEach(function (attr) {
     var key = attr.name;
     var val = attr.val;
     var mustEscape = attr.mustEscape;
@@ -122,7 +122,7 @@ function compileAttrs(attrs, options) {
         classesBuf
       );
     } else {
-      classes = classes.map(function(cls, i) {
+      classes = classes.map(function (cls, i) {
         if (isConstant(cls)) {
           cls = stringify(
             classEscaping[i] ? runtime.escape(toConstant(cls)) : toConstant(cls)

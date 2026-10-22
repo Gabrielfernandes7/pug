@@ -41,13 +41,13 @@ exports.runtime = runtime;
 exports.cache = {};
 
 function applyPlugins(value, options, plugins, name) {
-  return plugins.reduce(function(value, plugin) {
+  return plugins.reduce(function (value, plugin) {
     return plugin[name] ? plugin[name](value, options) : value;
   }, value);
 }
 
 function findReplacementFunc(plugins, name) {
-  var eligiblePlugins = plugins.filter(function(plugin) {
+  var eligiblePlugins = plugins.filter(function (plugin) {
     return plugin[name];
   });
 
@@ -82,16 +82,16 @@ function compileBody(str, options) {
   var ast = load.string(str, {
     filename: options.filename,
     basedir: options.basedir,
-    lex: function(str, options) {
+    lex: function (str, options) {
       var lexOptions = {};
-      Object.keys(options).forEach(function(key) {
+      Object.keys(options).forEach(function (key) {
         lexOptions[key] = options[key];
       });
       lexOptions.plugins = plugins
-        .filter(function(plugin) {
+        .filter(function (plugin) {
           return !!plugin.lex;
         })
-        .map(function(plugin) {
+        .map(function (plugin) {
           return plugin.lex;
         });
       var contents = applyPlugins(
@@ -107,8 +107,8 @@ function compileBody(str, options) {
         'postLex'
       );
     },
-    parse: function(tokens, options) {
-      tokens = tokens.map(function(token) {
+    parse: function (tokens, options) {
+      tokens = tokens.map(function (token) {
         if (token.type === 'path' && path.extname(token.val) === '') {
           return {
             type: 'path',
@@ -121,14 +121,14 @@ function compileBody(str, options) {
       tokens = stripComments(tokens, options);
       tokens = applyPlugins(tokens, options, plugins, 'preParse');
       var parseOptions = {};
-      Object.keys(options).forEach(function(key) {
+      Object.keys(options).forEach(function (key) {
         parseOptions[key] = options[key];
       });
       parseOptions.plugins = plugins
-        .filter(function(plugin) {
+        .filter(function (plugin) {
           return !!plugin.parse;
         })
-        .map(function(plugin) {
+        .map(function (plugin) {
           return plugin.parse;
         });
 
@@ -144,7 +144,7 @@ function compileBody(str, options) {
         'preLoad'
       );
     },
-    resolve: function(filename, source, loadOptions) {
+    resolve: function (filename, source, loadOptions) {
       var replacementFunc = findReplacementFunc(plugins, 'resolve');
       if (replacementFunc) {
         return replacementFunc(filename, source, options);
@@ -152,7 +152,7 @@ function compileBody(str, options) {
 
       return load.resolve(filename, source, loadOptions);
     },
-    read: function(filename, loadOptions) {
+    read: function (filename, loadOptions) {
       dependencies.push(filename);
 
       var contents;
@@ -174,11 +174,11 @@ function compileBody(str, options) {
   ast = applyPlugins(ast, options, plugins, 'preFilters');
 
   var filtersSet = {};
-  Object.keys(exports.filters).forEach(function(key) {
+  Object.keys(exports.filters).forEach(function (key) {
     filtersSet[key] = exports.filters[key];
   });
   if (options.filters) {
-    Object.keys(options.filters).forEach(function(key) {
+    Object.keys(options.filters).forEach(function (key) {
       filtersSet[key] = options.filters[key];
     });
   }
@@ -261,7 +261,7 @@ function handleTemplateCache(options, str) {
  * @api public
  */
 
-exports.compile = function(str, options) {
+exports.compile = function (str, options) {
   var options = options || {};
 
   str = String(str);
@@ -310,7 +310,7 @@ exports.compile = function(str, options) {
  * @api public
  */
 
-exports.compileClientWithDependenciesTracked = function(str, options) {
+exports.compileClientWithDependenciesTracked = function (str, options) {
   var options = options || {};
 
   str = String(str);
@@ -359,7 +359,7 @@ exports.compileClientWithDependenciesTracked = function(str, options) {
  * @return {String}
  * @api public
  */
-exports.compileClient = function(str, options) {
+exports.compileClient = function (str, options) {
   return exports.compileClientWithDependenciesTracked(str, options).body;
 };
 
@@ -377,7 +377,7 @@ exports.compileClient = function(str, options) {
  * @return {Function}
  * @api public
  */
-exports.compileFile = function(path, options) {
+exports.compileFile = function (path, options) {
   options = options || {};
   options.filename = path;
   return handleTemplateCache(options);
@@ -398,7 +398,7 @@ exports.compileFile = function(path, options) {
  * @api public
  */
 
-exports.render = function(str, options, fn) {
+exports.render = function (str, options, fn) {
   // support callback API
   if ('function' == typeof options) {
     (fn = options), (options = undefined);
@@ -433,7 +433,7 @@ exports.render = function(str, options, fn) {
  * @api public
  */
 
-exports.renderFile = function(path, options, fn) {
+exports.renderFile = function (path, options, fn) {
   // support callback API
   if ('function' == typeof options) {
     (fn = options), (options = undefined);
@@ -463,7 +463,7 @@ exports.renderFile = function(path, options, fn) {
  * @api public
  */
 
-exports.compileFileClient = function(path, options) {
+exports.compileFileClient = function (path, options) {
   var key = path + ':client';
   options = options || {};
 
@@ -483,7 +483,7 @@ exports.compileFileClient = function(path, options) {
  * Express support.
  */
 
-exports.__express = function(path, options, fn) {
+exports.__express = function (path, options, fn) {
   if (
     options.compileDebug == undefined &&
     process.env.NODE_ENV === 'production'

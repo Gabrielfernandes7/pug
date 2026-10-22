@@ -264,7 +264,7 @@ function pug_rethrow(err, filename, lineno, str) {
   // Error context
   context = lines
     .slice(start, end)
-    .map(function(line, i) {
+    .map(function (line, i) {
       var curr = i + start + 1;
       return (curr == lineno ? '  > ' : '    ') + curr + '| ' + line;
     })

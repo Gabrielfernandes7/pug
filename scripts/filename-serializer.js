@@ -12,14 +12,14 @@ function removeBasedir(value) {
 }
 // filename serializer that removes the basedir
 module.exports = {
-  test: function(val) {
+  test: function (val) {
     return (
       val &&
       typeof val === 'object' &&
       (matchesBasedir(val.filename) || matchesBasedir(val.message))
     );
   },
-  print: function(val, serialize, indent) {
+  print: function (val, serialize, indent) {
     const output = {};
     for (var key in val) {
       output[key] = val[key];

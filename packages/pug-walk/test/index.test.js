@@ -5,7 +5,7 @@ var lex = require('pug-lexer');
 var parse = require('pug-parser');
 var walk = require('../');
 
-test('simple', function() {
+test('simple', function () {
   var ast = walk(
     parse(lex('.my-class foo')),
     function before(node, replace) {
@@ -29,8 +29,8 @@ test('simple', function() {
   expect(ast).toEqual(parse(lex('.my-class bar')));
 });
 
-describe('replace([])', function() {
-  test('block flattening', function() {
+describe('replace([])', function () {
+  test('block flattening', function () {
     var called = [];
     var ast = walk(
       {
@@ -64,7 +64,7 @@ describe('replace([])', function() {
           },
         ],
       },
-      function(node, replace) {
+      function (node, replace) {
         if (node.type === 'Text') {
           called.push('before ' + node.val);
           if (node.val === 'a') {
@@ -82,7 +82,7 @@ describe('replace([])', function() {
           }
         }
       },
-      function(node, replace) {
+      function (node, replace) {
         if (node.type === 'Block' && replace.arrayAllowed) {
           replace(node.nodes);
         } else if (node.type === 'Text') {
@@ -126,50 +126,50 @@ describe('replace([])', function() {
     );
   });
 
-  test('adding include filters', function() {
-    var ast = walk(parse(lex('include:filter1:filter2 file')), function(
-      node,
-      replace
-    ) {
-      if (node.type === 'IncludeFilter') {
-        assert(replace.arrayAllowed);
-        if (node.name === 'filter1') {
-          var firstFilter = 'filter3';
+  test('adding include filters', function () {
+    var ast = walk(
+      parse(lex('include:filter1:filter2 file')),
+      function (node, replace) {
+        if (node.type === 'IncludeFilter') {
+          assert(replace.arrayAllowed);
+          if (node.name === 'filter1') {
+            var firstFilter = 'filter3';
 
-          replace([
-            {
-              type: 'IncludeFilter',
-              name: firstFilter,
-              attrs: [],
-              line: node.line,
-              column: node.column,
-            },
-            {
-              type: 'IncludeFilter',
-              name: 'filter4',
-              attrs: [],
-              line: node.line,
-              column: node.column + firstFilter.length + 1,
-            },
-          ]);
-        } else if (node.name === 'filter2') {
-          replace([]);
+            replace([
+              {
+                type: 'IncludeFilter',
+                name: firstFilter,
+                attrs: [],
+                line: node.line,
+                column: node.column,
+              },
+              {
+                type: 'IncludeFilter',
+                name: 'filter4',
+                attrs: [],
+                line: node.line,
+                column: node.column + firstFilter.length + 1,
+              },
+            ]);
+          } else if (node.name === 'filter2') {
+            replace([]);
+          }
         }
       }
-    });
+    );
 
     expect(ast).toEqual(parse(lex('include:filter3:filter4 file')));
   });
 
-  test('fails when parent is not Block', function() {
-    walk(parse(lex('p content')), function(node, replace) {
+  test('fails when parent is not Block', function () {
+    walk(parse(lex('p content')), function (node, replace) {
       if (
         node.type === 'Block' &&
         node.nodes[0] &&
         node.nodes[0].type === 'Text'
       ) {
         assert(!replace.arrayAllowed, 'replace.arrayAllowed set wrongly');
-        assert.throws(function() {
+        assert.throws(function () {
           replace([]);
         });
       }
