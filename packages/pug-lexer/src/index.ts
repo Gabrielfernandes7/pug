@@ -1396,7 +1396,7 @@ class Lexer {
           // line is indented less than the first line but is still indented
           // need to retry lexing the text block
           this.tokens.pop();
-          return this.pipelessText(lineCaptures![1].length);
+          return this.callLexerFunction('pipelessText', lineCaptures![1].length);
         }
       } while (this.input.length - stringPtr && isMatch);
       this.consume(stringPtr);

@@ -89,7 +89,7 @@ function checkMissingLexerFunction(node) {
   hadErrors = true;
 }
 test('lexer functions', () => {
-  const str = fs.readFileSync(`${__dirname}/../index.js`, 'utf8');
+  const str = fs.readFileSync(`${__dirname}/../lib/index.js`, 'utf8');
   const ast = acorn.parse(str, {locations: true});
   walk.simple(ast, {
     CallExpression(node) {
